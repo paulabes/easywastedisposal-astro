@@ -90,7 +90,7 @@ export const Header: React.FC = () => {
                 </button>
 
                 {activeMega === 'services' && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-[620px] bg-white rounded-b-2xl shadow-elevated p-6 z-50">
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-[620px] bg-gray-100 rounded-b-2xl shadow-elevated p-6 z-50">
                     <div className="grid grid-cols-2 gap-2">
                       {allServices.map(s => {
                         const SIcon = serviceIcons[s.slug];
@@ -98,7 +98,7 @@ export const Header: React.FC = () => {
                           <a
                             key={s.slug}
                             href={`/services/${s.slug}`}
-                            className="flex items-center justify-between bg-gray-50 border border-gray-200 px-3 py-2 rounded-xl text-sm font-bold hover:bg-green-50 hover:border-green-300 transition-all duration-200 group"
+                            className="flex items-center justify-between bg-white border border-gray-200 px-3 py-2 rounded-xl text-sm font-bold hover:bg-green-50 hover:border-green-300 transition-all duration-200 group"
                           >
                             <span className="flex items-center space-x-2">
                               <SIcon size={14} className="text-green-600" />
@@ -130,7 +130,7 @@ export const Header: React.FC = () => {
                 </button>
 
                 {activeMega === 'locations' && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-[620px] bg-white rounded-b-2xl shadow-elevated p-6 z-50">
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-[620px] bg-gray-100 rounded-b-2xl shadow-elevated p-6 z-50">
                     <div className="space-y-5">
                       {regions.map(region => (
                         <div key={region.slug}>
@@ -140,7 +140,7 @@ export const Header: React.FC = () => {
                               <a
                                 key={area.slug}
                                 href={`/locations/${area.slug}`}
-                                className="flex items-center justify-between bg-gray-50 border border-gray-200 px-3 py-2 rounded-xl text-sm font-bold hover:bg-green-50 hover:border-green-300 transition-all duration-200 group"
+                                className="flex items-center justify-between bg-white border border-gray-200 px-3 py-2 rounded-xl text-sm font-bold hover:bg-green-50 hover:border-green-300 transition-all duration-200 group"
                               >
                                 <span className="flex items-center space-x-2">
                                   <MapPin size={12} className="text-green-600" />
