@@ -1,0 +1,251 @@
+import React, { useState } from 'react';
+import { ArrowRight, ArrowLeft, Upload, X,
+  Trash2, Building, Sofa, TreePine, HardHat, House, Briefcase, Truck, Refrigerator
+} from 'lucide-react';
+import { Button } from './ui/Button';
+import { allServices, businessInfo, validatePostcode, coveredPostcodes } from '../data/locations';
+
+const serviceIcons: Record<string, any> = {
+  'rubbish-removal': Trash2,
+  'furniture-bulky-item-removal': Sofa,
+  'garden-waste-removal': TreePine,
+  'builders-waste-removal': HardHat,
+  'house-clearance': House,
+  'office-clearance': Briefcase,
+  'commercial-waste-disposal': Building,
+  'appliance-disposal': Refrigerator,
+  'wait-and-load': Truck,
+};
+
+export const QuoteForm: React.FC = () => {
+  const [formStep, setFormStep] = useState(1);
+  const [formData, setFormData] = useState({
+    service: '',
+    postcode: '',
+    timeframe: '',
+    name: '',
+    email: '',
+    phone: '',
+    details: '',
+  });
+  const [postcodeError, setPostcodeError] = useState('');
+  const [images, setImages] = useState<File[]>([]);
+  const [submitted, setSubmitted] = useState(false);
+
+  const updateField = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+    if (field === 'postcode') setPostcodeError('');
+  };
+
+  const handleStep1Continue = () => {
+    const result = validatePostcode(formData.postcode);
+    if (!result.covered) {
+      setPostcodeError(`Sorry, we don't currently cover that postcode. We serve: ${coveredPostcodes.join(', ')}.`);
+      return;
+    }
+    setFormStep(2);
+  };
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const newFiles = Array.from(e.target.files).slice(0, 5 - images.length);
+      setImages(prev => [...prev, ...newFiles]);
+    }
+  };
+
+  const removeImage = (index: number) => {
+    setImages(prev => prev.filter((_, i) => i !== index));
+  };
+
+  const handleSubmit = () => {
+    setSubmitted(true);
+  };
+
+  const timeframes = ['Within 24 hours', 'This week', 'Next week', 'Flexible / No rush'];
+
+  if (submitted) {
+    return (
+      <div className="bg-white rounded-3xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] p-8 lg:p-10 text-center border border-gray-100">
+        <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <ArrowRight size={24} className="text-green-600" />
+        </div>
+        <h2 className="text-xl font-bold text-dark mb-2">Quote Request Sent!</h2>
+        <p className="text-sm text-gray-500 mb-6">We'll get back to you shortly.</p>
+        <a href={businessInfo.phoneHref}>
+          <Button size="lg">Call Us Now: {businessInfo.phone}</Button>
+        </a>
+      </div>
+    );
+  }
+
+  return (
+    <div className="bg-white rounded-3xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] p-8 lg:p-10 border border-gray-100">
+      <div className="mb-6">
+        <h2 className="text-xl font-bold text-dark mb-1">Get your free quote</h2>
+        <p className="text-sm text-gray-500">No obligation. We respond shortly.</p>
+      </div>
+
+      {/* Progress Bar */}
+      <div className="flex items-center space-x-2 mb-8">
+        {[1, 2, 3].map(step => (
+          <div key={step} className="flex-1">
+            <div className={`h-1.5 rounded-full transition-colors duration-300 ${formStep >= step ? 'bg-green-500' : 'bg-gray-200'}`} />
+          </div>
+        ))}
+        <span className="text-xs text-gray-400 font-medium ml-2">Step {formStep}/3</span>
+      </div>
+
+      {/* Step 1: Service + Postcode */}
+      {formStep === 1 && (
+        <div className="space-y-5">
+          <div>
+            <label className="block text-sm font-semibold text-dark mb-2">What do you need?</label>
+            <div className="grid grid-cols-2 gap-2">
+              {allServices.map(s => {
+                const Icon = serviceIcons[s.slug];
+                return (
+                  <button
+                    key={s.slug}
+                    onClick={() => updateField('service', s.slug)}
+                    className={`flex items-center space-x-2 p-3 rounded-xl border-2 text-left transition-all duration-300 text-sm hover:-translate-y-0.5 ${
+                      formData.service === s.slug
+                        ? 'border-green-500 bg-green-50 text-green-800'
+                        : 'border-gray-300 hover:border-gray-400 text-gray-700'
+                    }`}
+                  >
+                    <Icon size={16} className={formData.service === s.slug ? 'text-green-600' : 'text-gray-400'} />
+                    <span className="font-medium text-xs leading-tight">{s.shortName}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold text-dark mb-2">Your postcode</label>
+            <input
+              type="text"
+              value={formData.postcode}
+              onChange={e => updateField('postcode', e.target.value.toUpperCase())}
+              placeholder="e.g. N8 0PS"
+              className={`w-full border-2 rounded-xl px-4 py-3 text-sm font-medium focus:ring-0 outline-none transition-colors ${postcodeError ? 'border-red-400 focus:border-red-500' : 'border-gray-300 focus:border-green-500'}`}
+            />
+            {postcodeError && (
+              <p className="text-xs text-red-500 mt-1.5">{postcodeError}</p>
+            )}
+          </div>
+
+          <Button size="lg" className="w-full" onClick={handleStep1Continue} disabled={!formData.service || !formData.postcode}>
+            Continue <ArrowRight size={16} className="ml-2" />
+          </Button>
+        </div>
+      )}
+
+      {/* Step 2: Timeframe + Details + Photos */}
+      {formStep === 2 && (
+        <div className="space-y-5">
+          <div>
+            <label className="block text-sm font-semibold text-dark mb-2">When do you need this?</label>
+            <div className="grid grid-cols-2 gap-2">
+              {timeframes.map(tf => (
+                <button
+                  key={tf}
+                  onClick={() => updateField('timeframe', tf)}
+                  className={`p-3 rounded-xl border-2 text-sm font-bold transition-all duration-300 hover:-translate-y-0.5 ${
+                    formData.timeframe === tf
+                      ? 'border-green-500 bg-green-50 text-green-800 shadow-sm'
+                      : 'border-gray-300 hover:border-gray-400 text-gray-700'
+                  }`}
+                >
+                  {tf}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold text-dark mb-2">Any details? (optional)</label>
+            <textarea
+              rows={3}
+              value={formData.details}
+              onChange={e => updateField('details', e.target.value)}
+              placeholder="e.g. Two sofas and a fridge from the second floor..."
+              className="w-full border-2 border-gray-300 rounded-xl px-4 py-3 text-sm font-medium focus:border-green-500 focus:ring-0 outline-none transition-all duration-300 resize-none"
+            />
+          </div>
+
+          {/* Image Upload */}
+          <div>
+            <label className="block text-sm font-semibold text-dark mb-2">Upload photos (optional)</label>
+            <p className="text-xs text-gray-400 mb-2">Send up to 5 photos for a more accurate quote.</p>
+            {images.length > 0 && (
+              <div className="flex flex-wrap gap-2 mb-3">
+                {images.map((img, i) => (
+                  <div key={i} className="relative w-16 h-16 bg-gray-100 rounded-xl overflow-hidden shadow-sm">
+                    <img src={URL.createObjectURL(img)} alt="" className="w-full h-full object-cover" />
+                    <button
+                      onClick={() => removeImage(i)}
+                      className="absolute top-0.5 right-0.5 w-5 h-5 bg-dark/70 rounded-full flex items-center justify-center"
+                    >
+                      <X size={10} className="text-white" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+            {images.length < 5 && (
+              <label className="flex items-center justify-center space-x-2 p-3 border-2 border-dashed border-gray-300 rounded-xl cursor-pointer hover:border-green-400 hover:bg-green-50 transition-all duration-300">
+                <Upload size={16} className="text-gray-400" />
+                <span className="text-sm text-gray-500">Choose photos</span>
+                <input type="file" accept="image/*" multiple onChange={handleImageUpload} className="hidden" />
+              </label>
+            )}
+          </div>
+
+          <div className="flex space-x-3">
+            <Button variant="dark" size="lg" onClick={() => setFormStep(1)} className="flex-shrink-0">
+              <ArrowLeft size={16} />
+            </Button>
+            <Button size="lg" className="flex-1" onClick={() => setFormStep(3)} disabled={!formData.timeframe}>
+              Continue <ArrowRight size={16} className="ml-2" />
+            </Button>
+          </div>
+        </div>
+      )}
+
+      {/* Step 3: Contact Details */}
+      {formStep === 3 && (
+        <div className="space-y-5">
+          <div>
+            <label className="block text-sm font-semibold text-dark mb-2">Full name</label>
+            <input type="text" value={formData.name} onChange={e => updateField('name', e.target.value)} placeholder="John Smith"
+              className="w-full border-2 border-gray-300 rounded-xl px-4 py-3 text-sm font-medium focus:border-green-500 focus:ring-0 outline-none transition-all duration-300" />
+          </div>
+          <div>
+            <label className="block text-sm font-semibold text-dark mb-2">Email address</label>
+            <input type="email" value={formData.email} onChange={e => updateField('email', e.target.value)} placeholder="john@example.com"
+              className="w-full border-2 border-gray-300 rounded-xl px-4 py-3 text-sm font-medium focus:border-green-500 focus:ring-0 outline-none transition-all duration-300" />
+          </div>
+          <div>
+            <label className="block text-sm font-semibold text-dark mb-2">Phone number</label>
+            <input type="tel" value={formData.phone} onChange={e => updateField('phone', e.target.value)} placeholder="07700 900000"
+              className="w-full border-2 border-gray-300 rounded-xl px-4 py-3 text-sm font-medium focus:border-green-500 focus:ring-0 outline-none transition-all duration-300" />
+          </div>
+
+          <div className="flex space-x-3">
+            <Button variant="dark" size="lg" onClick={() => setFormStep(2)} className="flex-shrink-0">
+              <ArrowLeft size={16} />
+            </Button>
+            <Button size="lg" className="flex-1" onClick={handleSubmit}>
+              Get My Free Quote <ArrowRight size={16} className="ml-2" />
+            </Button>
+          </div>
+
+          <p className="text-xs text-gray-400 text-center">
+            By submitting, you agree to our <a href="/privacy" className="underline">Privacy Policy</a>. We respond shortly.
+          </p>
+        </div>
+      )}
+    </div>
+  );
+};

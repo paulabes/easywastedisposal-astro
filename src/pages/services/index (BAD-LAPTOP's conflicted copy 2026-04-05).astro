@@ -1,0 +1,155 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ServiceIcon from '../../components/ServiceIcon.astro';
+import { allServices, businessInfo } from '../../data/locations';
+import { heroImage } from '../../data/images';
+---
+
+<Layout
+  title="Waste Disposal Services London | Same-Day Collection"
+  description={`All waste disposal services in London: rubbish removal, house clearance, garden waste, builders waste, commercial waste. Same-day collection from ${businessInfo.priceFrom}.`}
+  canonical="/services"
+>
+  <div class="space-y-0">
+    <!-- Hero -->
+    <section class="bg-dark relative overflow-hidden">
+      <div class="absolute inset-0">
+        <img src={heroImage} alt="" class="w-full h-full object-cover opacity-10 filter grayscale mix-blend-overlay" />
+      </div>
+      <div class="absolute inset-0 opacity-15">
+        <div class="absolute top-20 right-20 w-[500px] h-[500px] bg-green-500 rounded-full blur-[150px]"></div>
+        <div class="absolute bottom-10 left-10 w-[400px] h-[400px] bg-green-400 rounded-full blur-[120px]"></div>
+      </div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-16 lg:py-24">
+        <div class="text-center text-white max-w-3xl mx-auto">
+          <div class="inline-flex items-center space-x-2 bg-green-500/10 border border-green-500/20 px-3.5 py-2 rounded-full text-xs font-bold text-green-400 mb-6 tracking-wide">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+            <span>Licensed & Insured</span>
+          </div>
+
+          <h1 class="text-4xl lg:text-5xl xl:text-6xl font-extrabold leading-tight mb-6 tracking-tight">
+            Our Waste Disposal<br /><span class="text-green-400">Services</span>
+          </h1>
+
+          <p class="text-lg lg:text-xl text-gray-300 leading-relaxed mb-8 font-medium">
+            Professional, licensed waste removal for homes and businesses across London. Same-day collection available from only <strong class="text-white">{businessInfo.priceFrom}</strong>.
+          </p>
+
+          <a href={businessInfo.googleReviewsUrl} target="_blank" rel="noopener noreferrer" class="flex items-center justify-center space-x-2 mb-8 hover:opacity-80 transition-opacity">
+            <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+            <div class="flex">{[1,2,3,4,5].map(() => (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#facc15" stroke="#facc15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>))}</div>
+            <span class="text-sm font-bold text-white">{businessInfo.rating}</span>
+            <span class="text-xs text-gray-300 font-medium">{businessInfo.reviewCount}+ Google Reviews</span>
+          </a>
+
+          <div class="flex flex-row flex-nowrap justify-center gap-2 sm:gap-3">
+            <a href={businessInfo.phoneHref}>
+              <button class="inline-flex items-center justify-center font-bold tracking-wide transition-all duration-300 rounded-2xl bg-white text-dark hover:bg-gray-50 shadow-md border border-gray-200 px-3 sm:px-5 py-3 text-xs sm:text-sm hover:-translate-y-0.5 whitespace-nowrap">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                {businessInfo.phone}
+              </button>
+            </a>
+            <a href={businessInfo.whatsapp} target="_blank" rel="noopener noreferrer">
+              <button class="inline-flex items-center justify-center font-bold tracking-wide transition-all duration-300 rounded-2xl bg-[#25D366] text-white hover:bg-[#20BE5C] shadow-md px-3 sm:px-5 py-3 text-xs sm:text-sm hover:-translate-y-0.5 whitespace-nowrap">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+                WhatsApp
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Social Proof Strip -->
+    <section class="bg-gray-200 border-y border-gray-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          {[
+            { value: `${businessInfo.reviewCount}+`, label: 'Verified Reviews' },
+            { value: 'Same-Day', label: 'Collection Available' },
+            { value: `${businessInfo.yearsExperience} Years`, label: 'Experience' },
+            { value: `From ${businessInfo.priceFrom}`, label: 'Single Item Collection' },
+          ].map(stat => (
+            <div>
+              <p class="text-xl font-extrabold text-dark">{stat.value}</p>
+              <p class="text-sm text-gray-500 font-medium">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Grid -->
+    <section class="py-20 bg-gray-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-2xl lg:text-4xl font-extrabold text-dark mb-4 tracking-tight">All services</h2>
+          <p class="text-lg text-gray-500 max-w-2xl mx-auto font-medium">Whatever waste you need gone, we handle it professionally and responsibly.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {allServices.map(service => (
+            <a href={`/services/${service.slug}`} class="bg-white border border-gray-100 rounded-3xl p-8 shadow-md hover:border-green-300 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] transition-all duration-300 group block hover:-translate-y-1">
+              <div class="w-14 h-14 bg-green-50 rounded-2xl flex items-center justify-center text-green-600 mb-6 group-hover:bg-green-500 group-hover:text-white transition-colors duration-300">
+                <ServiceIcon slug={service.slug} size={24} />
+              </div>
+              <h3 class="text-xl font-extrabold text-dark mb-2 tracking-tight">{service.name}</h3>
+              <p class="text-sm text-gray-500 leading-relaxed mb-4">{service.description}</p>
+              <div class="flex items-center justify-between">
+                <span class="text-sm font-bold text-green-600">From {service.priceFrom}</span>
+                <span class="inline-flex items-center text-sm font-semibold text-green-600 group-hover:text-green-700 transition-colors">
+                  Learn more <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </span>
+              </div>
+            </a>
+          ))}
+        </div>
+
+        <!-- CTA Bar -->
+        <div class="mt-14 bg-dark rounded-3xl p-6 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl">
+          <div class="text-white text-center md:text-left">
+            <p class="font-extrabold text-3xl tracking-tight mb-1">Not sure what you need?</p>
+            <p class="text-base text-gray-300 font-medium">Call or WhatsApp us for free advice and a same-day quote.</p>
+          </div>
+          <div class="flex flex-row flex-nowrap gap-2 sm:gap-3 shrink-0">
+            <a href={businessInfo.phoneHref}>
+              <button class="inline-flex items-center justify-center font-bold tracking-wide transition-all duration-300 rounded-2xl bg-white text-dark hover:bg-gray-50 shadow-md border border-gray-200 px-3 sm:px-5 py-3 text-xs sm:text-sm hover:-translate-y-0.5 whitespace-nowrap">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                {businessInfo.phone}
+              </button>
+            </a>
+            <a href={businessInfo.whatsapp} target="_blank" rel="noopener noreferrer">
+              <button class="inline-flex items-center justify-center font-bold tracking-wide transition-all duration-300 rounded-2xl bg-[#25D366] text-white hover:bg-[#20BE5C] shadow-md px-3 sm:px-5 py-3 text-xs sm:text-sm hover:-translate-y-0.5 whitespace-nowrap">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+                WhatsApp
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Price Match -->
+    <section class="py-20 bg-dark">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+        <h2 class="text-2xl lg:text-4xl font-extrabold mb-4 tracking-tight">We match any price - guaranteed!</h2>
+        <p class="text-green-100 mb-8 max-w-xl mx-auto text-lg">Found a cheaper quote? We'll match it or beat it. No questions asked.</p>
+        <div class="flex flex-row flex-nowrap justify-center gap-2 sm:gap-3">
+          <a href={businessInfo.phoneHref}>
+            <button class="inline-flex items-center justify-center font-bold tracking-wide transition-all duration-300 rounded-2xl bg-white text-dark hover:bg-gray-50 shadow-md border border-gray-200 px-3 sm:px-5 py-3 text-xs sm:text-sm hover:-translate-y-0.5 whitespace-nowrap">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              {businessInfo.phone}
+            </button>
+          </a>
+          <a href={businessInfo.whatsapp} target="_blank" rel="noopener noreferrer">
+            <button class="inline-flex items-center justify-center font-bold tracking-wide transition-all duration-300 rounded-2xl bg-[#25D366] text-white hover:bg-[#20BE5C] shadow-md px-3 sm:px-5 py-3 text-xs sm:text-sm hover:-translate-y-0.5 whitespace-nowrap">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+              WhatsApp
+            </button>
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>
