@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import {
   Menu, X, ChevronDown, MapPin, Phone, Mail, Clock,
-  Trash2, Building, Sofa, Truck, Leaf, HardHat, Package, Briefcase,
+  Trash2, Building, Sofa, Truck, TreePine, HardHat, House, Briefcase,
   MessageCircle, Shield, Refrigerator, ArrowRight
 } from 'lucide-react';
 import { Button } from './ui/Button';
@@ -11,9 +11,9 @@ import { allServices, regions, businessInfo } from '../data/locations';
 const serviceIcons: Record<string, any> = {
   'rubbish-removal': Trash2,
   'furniture-bulky-item-removal': Sofa,
-  'garden-waste-removal': Leaf,
+  'garden-waste-removal': TreePine,
   'builders-waste-removal': HardHat,
-  'house-clearance': Package,
+  'house-clearance': House,
   'office-clearance': Briefcase,
   'commercial-waste-disposal': Building,
   'appliance-disposal': Refrigerator,
