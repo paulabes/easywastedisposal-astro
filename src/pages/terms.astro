@@ -1,0 +1,236 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { businessInfo } from '../data/locations';
+
+const sidebarLinks = [
+  { href: '#service-agreement', label: 'Service agreement' },
+  { href: '#scope', label: 'Scope of services' },
+  { href: '#pricing-payment', label: 'Pricing & payment' },
+  { href: '#access', label: 'Access requirements' },
+  { href: '#cancellation', label: 'Cancellation' },
+  { href: '#prohibited-items', label: 'Prohibited items' },
+  { href: '#liability', label: 'Liability' },
+  { href: '#complaints', label: 'Complaints' },
+  { href: '#general', label: 'General' },
+];
+---
+
+<Layout
+  title="Terms of Service"
+  description="Terms of Service for Easy Waste Disposal. Read our terms and conditions for waste collection and disposal services."
+  canonical="/terms"
+>
+  <div class="space-y-0">
+    <!-- Hero -->
+    <section class="bg-dark relative overflow-hidden">
+      <div class="absolute inset-0 opacity-15">
+        <div class="absolute top-20 right-20 w-[500px] h-[500px] bg-green-500 rounded-full blur-[150px]"></div>
+      </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-16 lg:py-20">
+        <div class="text-center max-w-3xl mx-auto">
+          <h1 class="text-4xl lg:text-5xl font-extrabold leading-tight mb-4 tracking-tight text-white">Terms of Service</h1>
+          <p class="text-lg text-gray-300 font-medium">The terms and conditions that govern our waste collection and disposal services.</p>
+          <div class="flex items-center justify-center space-x-2 mb-8">
+            <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+            <div class="flex">{[1,2,3,4,5].map(() => (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#facc15" stroke="#facc15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>))}</div>
+            <span class="text-sm font-bold text-white">{businessInfo.rating}</span>
+            <span class="text-xs text-gray-300 font-medium">{businessInfo.reviewCount}+ Google Reviews</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content -->
+    <section class="py-16 lg:py-20 bg-gray-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-12">
+          <!-- Sidebar -->
+          <div class="lg:col-span-1">
+            <nav class="lg:sticky lg:top-24">
+              <h3 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">On this page</h3>
+              <ul class="space-y-2">
+                {sidebarLinks.map(link => (
+                  <li>
+                    <a href={link.href} class="text-sm text-gray-500 hover:text-green-600 transition-colors block py-1">{link.label}</a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
+
+          <!-- Main Content -->
+          <div class="lg:col-span-3 space-y-12">
+            <div id="service-agreement">
+              <h2 class="text-2xl font-extrabold text-dark mb-4 tracking-tight">Service agreement</h2>
+              <div class="space-y-4 text-gray-600 leading-relaxed text-sm">
+                <p>
+                  These terms of service ("Terms") govern the provision of waste collection and disposal services by Easy Waste Disposal ("we", "our", "us") to you ("the Customer"). By booking or using our services, you agree to be bound by these Terms.
+                </p>
+                <p>
+                  Easy Waste Disposal is a licensed waste carrier registered with the Environment Agency under licence number {businessInfo.licenceNumber}. We operate in accordance with all applicable waste management legislation and environmental regulations.
+                </p>
+                <p>
+                  We reserve the right to update these Terms at any time. The latest version will always be available on our website. Continued use of our services after changes constitutes acceptance of the updated Terms.
+                </p>
+              </div>
+            </div>
+
+            <div id="scope">
+              <h2 class="text-2xl font-extrabold text-dark mb-4 tracking-tight">Scope of services</h2>
+              <div class="space-y-4 text-gray-600 leading-relaxed text-sm">
+                <p>
+                  We provide waste collection, removal, and disposal services for residential and commercial customers across London. Our services include but are not limited to:
+                </p>
+                <ul class="list-disc list-inside space-y-2 ml-2">
+                  <li>General rubbish and household waste removal</li>
+                  <li>Furniture and bulky item collection</li>
+                  <li>Garden and green waste clearance</li>
+                  <li>Builders and construction waste removal</li>
+                  <li>Full and partial house clearances</li>
+                  <li>Office and commercial clearances</li>
+                  <li>Appliance disposal (WEEE-compliant)</li>
+                  <li>Wait and load collections</li>
+                </ul>
+                <p>
+                  All waste collected is transported to licensed waste transfer stations where it is sorted, recycled, or disposed of in accordance with environmental regulations. We provide waste transfer notes for every collection as proof of legal, responsible disposal.
+                </p>
+              </div>
+            </div>
+
+            <div id="pricing-payment">
+              <h2 class="text-2xl font-extrabold text-dark mb-4 tracking-tight">Pricing & payment</h2>
+              <div class="space-y-4 text-gray-600 leading-relaxed text-sm">
+                <p>
+                  All quotes provided are based on the information given by the Customer at the time of enquiry. Quotes are valid for 7 days from the date of issue unless otherwise stated.
+                </p>
+                <p>
+                  If the volume, weight, or type of waste differs significantly from what was described, we reserve the right to adjust the price before commencing work. Any price adjustment will be communicated to the Customer and agreed upon before we proceed.
+                </p>
+                <p>
+                  Payment is due upon completion of the service unless alternative arrangements have been agreed in advance. We accept cash, bank transfer, and card payments.
+                </p>
+                <p>
+                  For commercial accounts and regular collections, payment terms may be agreed separately. Invoices for account customers are payable within 14 days of the invoice date.
+                </p>
+                <p>
+                  We reserve the right to charge interest on overdue invoices at the rate of 4% above the Bank of England base rate, in accordance with the Late Payment of Commercial Debts (Interest) Act 1998.
+                </p>
+              </div>
+            </div>
+
+            <div id="access">
+              <h2 class="text-2xl font-extrabold text-dark mb-4 tracking-tight">Access requirements</h2>
+              <div class="space-y-4 text-gray-600 leading-relaxed text-sm">
+                <p>
+                  The Customer is responsible for ensuring adequate access to the waste to be collected. This includes ensuring that our crew can safely reach the items, that any gates or doors are unlocked, and that parking is available for our vehicle nearby.
+                </p>
+                <p>
+                  If access is restricted, more difficult than described, or if parking is not available within a reasonable distance, additional charges may apply. We will always discuss any additional costs with you before proceeding.
+                </p>
+                <p>
+                  If we are unable to carry out the collection due to access issues not disclosed at the time of booking, a call-out fee may be charged.
+                </p>
+              </div>
+            </div>
+
+            <div id="cancellation">
+              <h2 class="text-2xl font-extrabold text-dark mb-4 tracking-tight">Cancellation</h2>
+              <div class="space-y-4 text-gray-600 leading-relaxed text-sm">
+                <p>
+                  You may cancel or reschedule a booking free of charge by giving us at least 2 hours' notice before the scheduled collection time.
+                </p>
+                <p>
+                  Cancellations made with less than 2 hours' notice, or where our crew has already been dispatched, may incur a cancellation fee to cover our costs.
+                </p>
+                <p>
+                  We reserve the right to cancel or reschedule a booking due to unforeseen circumstances such as severe weather, vehicle breakdown, or other events beyond our control. In such cases, we will contact you as soon as possible to arrange an alternative time at no additional cost.
+                </p>
+              </div>
+            </div>
+
+            <div id="prohibited-items">
+              <h2 class="text-2xl font-extrabold text-dark mb-4 tracking-tight">Prohibited items</h2>
+              <div class="space-y-4 text-gray-600 leading-relaxed text-sm">
+                <p>
+                  For the safety of our team and in compliance with environmental regulations, we cannot collect or dispose of the following items:
+                </p>
+                <ul class="list-disc list-inside space-y-2 ml-2">
+                  <li><strong>Asbestos</strong> and asbestos-containing materials</li>
+                  <li><strong>Hazardous chemicals</strong> including solvents, pesticides, and industrial chemicals</li>
+                  <li><strong>Clinical and medical waste</strong> including sharps, pharmaceuticals, and biological waste</li>
+                  <li><strong>Explosives and ammunition</strong></li>
+                  <li><strong>Radioactive materials</strong></li>
+                  <li><strong>Tyres</strong> (in large quantities - please contact us to discuss)</li>
+                  <li><strong>Liquid waste</strong> including paints, oils, and fuels (small sealed containers may be accepted)</li>
+                </ul>
+                <p>
+                  If prohibited items are found mixed in with other waste during collection, we reserve the right to refuse those items and may need to leave them on site. If you are unsure whether an item is accepted, please contact us before booking.
+                </p>
+              </div>
+            </div>
+
+            <div id="liability">
+              <h2 class="text-2xl font-extrabold text-dark mb-4 tracking-tight">Liability</h2>
+              <div class="space-y-4 text-gray-600 leading-relaxed text-sm">
+                <p>
+                  We carry comprehensive public liability insurance and will take all reasonable care when carrying out work at your property. However, some surfaces (such as lawns, gravel paths, or narrow hallways) may be subject to minor wear during the removal of heavy items.
+                </p>
+                <p>
+                  We will not be liable for any damage caused by the removal of items that are structurally integrated into the property (such as fitted furniture or built-in appliances) unless we have been specifically instructed and agreed to remove them.
+                </p>
+                <p>
+                  Our total liability for any claim arising from our services shall not exceed the value of the service fee paid for the collection in question.
+                </p>
+                <p>
+                  We are not liable for any indirect or consequential losses, including loss of profit, loss of business, or loss of opportunity.
+                </p>
+              </div>
+            </div>
+
+            <div id="complaints">
+              <h2 class="text-2xl font-extrabold text-dark mb-4 tracking-tight">Complaints</h2>
+              <div class="space-y-4 text-gray-600 leading-relaxed text-sm">
+                <p>
+                  We take all complaints seriously and aim to resolve any issues promptly and fairly. If you are not satisfied with any aspect of our service, please contact us:
+                </p>
+                <ul class="space-y-2 ml-2">
+                  <li><strong>Email:</strong> <a href={`mailto:${businessInfo.email}`} class="text-green-600 hover:text-green-700 transition-colors">{businessInfo.email}</a></li>
+                  <li><strong>Phone:</strong> <a href={businessInfo.phoneHref} class="text-green-600 hover:text-green-700 transition-colors">{businessInfo.phone}</a></li>
+                </ul>
+                <p>
+                  We will acknowledge your complaint within 24 hours and aim to provide a full response within 5 working days. If we are unable to resolve your complaint to your satisfaction, we will provide information about further steps you can take.
+                </p>
+              </div>
+            </div>
+
+            <div id="general">
+              <h2 class="text-2xl font-extrabold text-dark mb-4 tracking-tight">General</h2>
+              <div class="space-y-4 text-gray-600 leading-relaxed text-sm">
+                <p>
+                  These Terms are governed by the laws of England and Wales. Any disputes arising from these Terms or our services shall be subject to the exclusive jurisdiction of the courts of England and Wales.
+                </p>
+                <p>
+                  If any provision of these Terms is found to be invalid or unenforceable, the remaining provisions shall continue in full force and effect.
+                </p>
+                <p>
+                  Our failure to enforce any right or provision of these Terms shall not constitute a waiver of that right or provision.
+                </p>
+                <p>
+                  These Terms, together with our Privacy Policy, constitute the entire agreement between you and Easy Waste Disposal regarding the use of our services.
+                </p>
+                <ul class="space-y-2 ml-2 mt-4">
+                  <li><strong>Company:</strong> {businessInfo.name}</li>
+                  <li><strong>Address:</strong> {businessInfo.address}</li>
+                  <li><strong>Email:</strong> <a href={`mailto:${businessInfo.email}`} class="text-green-600 hover:text-green-700 transition-colors">{businessInfo.email}</a></li>
+                  <li><strong>Phone:</strong> <a href={businessInfo.phoneHref} class="text-green-600 hover:text-green-700 transition-colors">{businessInfo.phone}</a></li>
+                  <li><strong>Waste Carrier Licence:</strong> {businessInfo.licenceNumber}</li>
+                </ul>
+                <p class="text-gray-400 text-xs mt-8">These terms were last updated on 1 January 2025.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>

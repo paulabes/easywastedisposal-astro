@@ -1,0 +1,331 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ServiceIcon from '../../../components/ServiceIcon.astro';
+import { areas, servicesMeta, allServices, getArea, regions, businessInfo, type ServiceSlug } from '../../../data/locations';
+import { getAreaContent } from '../../../data/area-content';
+import { getLocationServiceContent } from '../../../data/location-service-content';
+
+export function getStaticPaths() {
+  const paths = [];
+  for (const area of areas) {
+    for (const slug of Object.keys(servicesMeta)) {
+      paths.push({ params: { areaSlug: area.slug, serviceSlug: slug } });
+    }
+  }
+  return paths;
+}
+
+const { areaSlug, serviceSlug } = Astro.params;
+const area = getArea(areaSlug!);
+const service = serviceSlug ? servicesMeta[serviceSlug as ServiceSlug] : null;
+const areaContent = getAreaContent(areaSlug!);
+if (!service || !area) return Astro.redirect('/services');
+
+const postcodes = area.postcodes.join(', ');
+const content = getLocationServiceContent(areaSlug!, area.name, area.postcodes, service, areaContent || null);
+const skipHireSlugs = ['rubbish-removal', 'furniture-bulky-item-removal', 'builders-waste-removal'];
+const complianceSlugs = ['commercial-waste-disposal', 'office-clearance'];
+const isSkipHire = skipHireSlugs.includes(service.slug);
+const isCompliance = complianceSlugs.includes(service.slug);
+const isNextDay = ['house-clearance', 'office-clearance'].includes(service.slug);
+const availability = isNextDay ? 'Next-Day' : 'Same-Day';
+
+const otherServices = allServices.filter(s => s.slug !== service.slug);
+---
+
+<Layout
+  title={`${service.name} ${area.name} ${postcodes} | ${availability} Collection`}
+  description={content.heroDescription}
+  canonical={`/locations/${areaSlug}/${serviceSlug}`}
+>
+  <div class="space-y-0">
+    <!-- Hero -->
+    <section class="bg-dark relative overflow-hidden">
+      <div class="absolute inset-0 opacity-15">
+        <div class="absolute top-20 right-20 w-[500px] h-[500px] bg-green-500 rounded-full blur-[150px]"></div>
+        <div class="absolute bottom-10 left-10 w-[400px] h-[400px] bg-green-400 rounded-full blur-[120px]"></div>
+      </div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-16 lg:py-24">
+        <div class="text-center text-white max-w-3xl mx-auto">
+          <h1 class="text-4xl lg:text-5xl xl:text-6xl font-extrabold leading-tight mb-6 tracking-tight">
+            {service.name} in<br />
+            <span class="text-green-400">{area.name}</span>
+          </h1>
+
+          <p class="text-lg lg:text-xl text-gray-300 leading-relaxed mb-8 font-medium">
+            {content.heroDescription}
+          </p>
+
+          <div class="flex items-center justify-center space-x-2 mb-8">
+            <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+            <div class="flex">{[1,2,3,4,5].map(() => (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#facc15" stroke="#facc15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>))}</div>
+            <span class="text-sm font-bold text-white">{businessInfo.rating}</span>
+            <span class="text-xs text-gray-300 font-medium">{businessInfo.reviewCount}+ Google Reviews</span>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 max-w-xl mx-auto">
+            <div class="flex items-center justify-center space-x-2 text-sm text-gray-300 whitespace-nowrap">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-400 flex-shrink-0"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+              <span>Licenced Waste Carrier</span>
+            </div>
+            <div class="flex items-center justify-center space-x-2 text-sm text-gray-300 whitespace-nowrap">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-400 flex-shrink-0"><circle cx="12" cy="12" r="10"/><path d="M15 8h-4a3 3 0 0 0 0 6h1"/><path d="M9 16h5"/><path d="M10 12H8"/><path d="M12 6v2"/><path d="M12 16v2"/></svg>
+              <span>Price Match Guarantee</span>
+            </div>
+            <div class="flex items-center justify-center space-x-2 text-sm text-gray-300 whitespace-nowrap">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-400 flex-shrink-0"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span>{availability} Available</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Social Proof Strip -->
+    <section class="bg-gray-200 border-y border-gray-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          {[
+            { value: `${businessInfo.reviewCount}+`, label: 'Verified Reviews' },
+            { value: availability, label: 'Collection Available' },
+            { value: `${businessInfo.yearsExperience} Years`, label: 'Experience' },
+            { value: businessInfo.recyclingRate, label: 'Recycling Rate' },
+          ].map(stat => (
+            <div>
+              <p class="text-xl font-extrabold text-dark">{stat.value}</p>
+              <p class="text-sm text-gray-500 font-medium">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- What's Included -->
+    <section class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-2xl lg:text-4xl font-extrabold text-dark mb-4 tracking-tight">What's included</h2>
+          <p class="text-lg text-gray-500 max-w-2xl mx-auto font-medium">{service.description}</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
+          {service.features.map(feature => (
+            <div class="flex items-start space-x-3 bg-gray-50 rounded-2xl p-5 border border-gray-100">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-500 flex-shrink-0 mt-0.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+              <span class="text-sm text-gray-700 font-medium">{feature}</span>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="bg-gray-100 py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-2xl lg:text-4xl font-extrabold text-dark mb-4 tracking-tight">How it works</h2>
+          <p class="text-lg text-gray-500 font-medium">Three simple steps to clear your space in {area.name}.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {[
+            { step: '01', title: 'Request a quote', desc: `Tell us what you need removed in ${area.name}. Send a photo for an instant, accurate quote - no hidden fees.` },
+            { step: '02', title: 'We collect', desc: `Our licensed crew arrives at your chosen time. ${availability} available across all ${postcodes} postcodes. We do all the heavy lifting.` },
+            { step: '03', title: 'Responsibly disposed', desc: `Your waste is recycled or responsibly disposed of at a licensed facility. You receive a waste transfer note for your records.` },
+          ].map((item, i) => (
+            <div class="relative bg-[#f5f5f5] rounded-3xl p-8 border border-gray-300 shadow-lg text-center transition-all duration-300 hover:-translate-y-1 group">
+              <div class="text-5xl font-extrabold text-green-100 absolute top-4 right-6">{item.step}</div>
+              <h3 class="text-lg font-bold text-dark mb-2 relative z-10">{item.title}</h3>
+              <p class="text-sm text-gray-500 leading-relaxed relative z-10 mb-4">{item.desc}</p>
+              {i === 0 && (
+                <a href="/contact#quote" class="relative z-10">
+                  <button class="w-full inline-flex items-center justify-center font-bold tracking-wide transition-all duration-300 rounded-2xl bg-green-600 text-white hover:bg-green-500 shadow-md border border-green-500 px-5 py-3 text-sm hover:-translate-y-0.5">
+                    Get a quote <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </button>
+                </a>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Local Context & Why Choose Us -->
+    <section class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+          <div>
+            <h2 class="text-2xl lg:text-4xl font-extrabold text-dark mb-6 tracking-tight">{service.name} in {area.name}</h2>
+            {content.localContext.map(paragraph => (
+              <p class="text-gray-500 leading-relaxed mb-4">{paragraph}</p>
+            ))}
+            {areaContent?.nearbyNote && (
+              <div class="mt-4 bg-gray-50 border border-gray-200 rounded-2xl p-6">
+                <div class="flex items-start space-x-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-600 flex-shrink-0 mt-0.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                  <p class="text-sm text-gray-600">{areaContent.nearbyNote}</p>
+                </div>
+              </div>
+            )}
+          </div>
+          <div class="bg-green-50 rounded-3xl p-8 border-2 border-green-200">
+            <h2 class="text-xl font-extrabold text-dark mb-6 tracking-tight">Why choose us in {area.name}?</h2>
+            <ul class="space-y-3">
+              {content.localBenefits.map(benefit => (
+                <li class="flex items-start space-x-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-600 flex-shrink-0 mt-0.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                  <span class="text-gray-700">{benefit}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skip Hire Alternative (conditional) -->
+    {isSkipHire && (
+      <section class="py-20 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-12">
+            <h2 class="text-2xl lg:text-4xl font-extrabold text-dark mb-4 tracking-tight">A better alternative to skip hire in {area.name}</h2>
+            <p class="text-lg text-gray-500 leading-relaxed max-w-2xl mx-auto">Skip hire means waiting for delivery, applying for council permits, losing a parking space, and then waiting again for collection. Our {service.shortName.toLowerCase()} service is faster, easier, and often cheaper.</p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="bg-white rounded-3xl p-8 border-2 border-gray-200 shadow-md">
+              <h3 class="text-xl font-extrabold text-dark mb-6 tracking-tight">Skip Hire</h3>
+              <ul class="space-y-4">
+                {['Wait days for delivery', 'Council permit required', 'Blocks your driveway or road', 'You load it yourself', 'Wait days for collection'].map(item => (
+                  <li class="flex items-start space-x-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-red-500 flex-shrink-0 mt-0.5"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+                    <span class="text-gray-500 font-medium">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div class="bg-green-50 rounded-3xl p-8 border-2 border-green-200 shadow-md">
+              <h3 class="text-xl font-extrabold text-dark mb-6 tracking-tight">Our Service</h3>
+              <ul class="space-y-4">
+                {[`${availability} collection`, 'No permits needed', 'No space taken up', 'We do all the loading', 'Gone in one visit'].map(item => (
+                  <li class="flex items-start space-x-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-600 flex-shrink-0 mt-0.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                    <span class="text-gray-700 font-medium">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- Compliance Section (conditional) -->
+    {isCompliance && (
+      <section class="py-20 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-12">
+            <h2 class="text-2xl lg:text-4xl font-extrabold text-dark mb-4 tracking-tight">Full compliance and documentation</h2>
+            <p class="text-lg text-gray-500 leading-relaxed max-w-2xl mx-auto">
+              Every business has a legal duty of care when it comes to waste disposal. We make compliance easy by providing full documentation with every collection.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {[
+              { title: 'Waste Transfer Notes', desc: 'Provided for every collection as proof of legal disposal.' },
+              { title: 'Duty of Care Documentation', desc: 'Complete audit trail for your business records.' },
+              { title: 'Environment Agency Licensed', desc: `Licence number ${businessInfo.licenceNumber}.` },
+              { title: 'WEEE Compliance', desc: 'IT equipment and electronics disposed of to WEEE standards.' },
+            ].map(item => (
+              <div class="flex items-start space-x-3 bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-600 flex-shrink-0 mt-0.5"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+                  <div>
+                    <h3 class="font-bold text-dark">{item.title}</h3>
+                    <p class="text-gray-500">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- FAQ Section (conditional) -->
+    {service.faqs && service.faqs.length > 0 && (
+      <section class={`py-20 ${isSkipHire || isCompliance ? 'bg-white' : 'bg-gray-100'}`}>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-14">
+            <h2 class="text-2xl lg:text-4xl font-extrabold text-dark mb-4 tracking-tight">Frequently asked questions</h2>
+            <p class="text-lg text-gray-500 max-w-2xl mx-auto">Common questions about {service.name.toLowerCase()} in {area.name}.</p>
+          </div>
+          <div class="max-w-3xl mx-auto space-y-4">
+            {service.faqs.map(faq => (
+              <details class="group bg-gray-50 rounded-2xl border border-gray-200 shadow-sm">
+                <summary class="flex items-center justify-between cursor-pointer px-6 py-5 text-dark font-bold text-sm list-none">
+                  {faq.question}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400 group-open:rotate-180 transition-transform flex-shrink-0 ml-4"><path d="m6 9 6 6 6-6"/></svg>
+                </summary>
+                <div class="px-6 pb-5">
+                  <p class="text-sm text-gray-500 leading-relaxed">{faq.answer}</p>
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- Other Services in This Area -->
+    <section class="py-20 bg-gray-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-2xl lg:text-4xl font-extrabold text-dark mb-4 tracking-tight">Other services in {area.name}</h2>
+          <p class="text-lg text-gray-500 max-w-2xl mx-auto font-medium">We offer a full range of waste disposal services across {postcodes}.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {otherServices.map(s => (
+            <a href={`/locations/${areaSlug}/${s.slug}`} class="bg-white border border-gray-100 rounded-3xl p-8 shadow-md hover:border-green-300 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] transition-all duration-300 group block hover:-translate-y-1">
+              <div class="w-14 h-14 bg-green-50 rounded-2xl flex items-center justify-center text-green-600 mb-6 group-hover:bg-green-500 group-hover:text-white transition-colors duration-300">
+                <ServiceIcon slug={s.slug} size={24} />
+              </div>
+              <h3 class="text-xl font-extrabold text-dark mb-2 tracking-tight">{s.name}</h3>
+              <p class="text-sm text-gray-500 leading-relaxed mb-4">{s.description}</p>
+              <div class="flex items-center justify-between">
+                <span class="text-sm font-bold text-green-600">From {s.priceFrom}</span>
+                <span class="inline-flex items-center text-sm font-semibold text-green-600 group-hover:text-green-700 transition-colors">
+                  Learn more <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </span>
+              </div>
+            </a>
+          ))}
+        </div>
+
+        <!-- CTA Bar -->
+        <div class="mt-14 bg-dark rounded-3xl p-10 flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl">
+          <div class="text-white text-center md:text-left">
+            <p class="font-extrabold text-2xl tracking-tight mb-1">Need {service.shortName.toLowerCase()} in {area.name}?</p>
+            <p class="text-base text-gray-300 font-medium">Call or WhatsApp us for a free, no-obligation quote. {availability} available.</p>
+          </div>
+          <div class="flex flex-row gap-3 shrink-0">
+            <a href={businessInfo.phoneHref}>
+              <button class="inline-flex items-center justify-center font-bold tracking-wide transition-all duration-300 rounded-2xl bg-white text-dark hover:bg-gray-50 shadow-md border border-gray-200 px-5 py-3 text-sm hover:-translate-y-0.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                {businessInfo.phone}
+              </button>
+            </a>
+            <a href={businessInfo.whatsapp} target="_blank" rel="noopener noreferrer">
+              <button class="inline-flex items-center justify-center font-bold tracking-wide transition-all duration-300 rounded-2xl bg-dark text-white hover:bg-dark-50 shadow-md px-5 py-3 text-sm hover:-translate-y-0.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+                WhatsApp
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>

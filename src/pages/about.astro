@@ -1,0 +1,264 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { businessInfo } from '../data/locations';
+import { aboutImage } from '../data/images';
+
+const reviews = [
+  { name: 'Sarah M.', location: 'Crouch End, N8', text: 'Brilliant service. They arrived on time, cleared everything from our loft, and even swept up after. Highly recommend.' },
+  { name: 'James T.', location: 'Hackney, E8', text: 'Used them for a full house clearance after probate. Sensitive, professional, and very fairly priced.' },
+  { name: 'Priya K.', location: 'Islington, N1', text: 'Quick response, competitive price, and they recycled almost everything. Will definitely use again.' },
+  { name: 'David R.', location: 'Wood Green, N22', text: "Had a sofa and two mattresses collected same day. Couldn't believe how fast they were. Great value too." },
+  { name: 'Emma L.', location: 'Finsbury Park, N4', text: 'Used for a garden clearance - old shed, soil, and hedge cuttings. All gone in under an hour. Excellent.' },
+  { name: 'Michael O.', location: 'Tottenham, N17', text: "Regular commercial collections for our restaurant. Always on time, always professional. Wouldn't use anyone else." },
+];
+
+const aboutFaqs = [
+  {
+    question: 'How much does rubbish removal cost?',
+    answer: `Our prices start from just ${businessInfo.priceFrom}. The final cost depends on the volume and type of waste. We always provide an upfront, no-obligation quote before we start so there are no surprises.`,
+  },
+  {
+    question: 'Do you offer same-day collection?',
+    answer: 'Yes, we offer same-day collection across all the areas we serve. Call or WhatsApp us before midday for the best chance of a same-day slot. Next-day collection is also available.',
+  },
+  {
+    question: 'What areas do you cover?',
+    answer: 'We cover Haringey (Wood Green, Crouch End, Muswell Hill, Tottenham, Finsbury Park, Hornsey, Bounds Green, Highgate, Harringay), Central London (Westminster, Camden, Islington, City of London), and North London (Enfield, Hackney).',
+  },
+  {
+    question: 'Are you licensed and insured?',
+    answer: `Yes, we are fully licensed by the Environment Agency under licence number ${businessInfo.licenceNumber}. We also carry comprehensive public liability insurance and provide waste transfer notes for every collection.`,
+  },
+  {
+    question: 'What types of waste do you collect?',
+    answer: 'We collect household rubbish, garden and green waste, bulky items (sofas, mattresses, fridges), builders and construction waste, commercial waste, and handle full house and office clearances. The only items we cannot accept are hazardous waste such as asbestos, chemicals, and clinical waste.',
+  },
+  {
+    question: 'Do I need to be home when you collect?',
+    answer: 'Not necessarily. If the waste is accessible (for example, outside in a garden or driveway), we can collect without you being home. Just let us know the situation when you book and we will advise.',
+  },
+];
+
+const coverageAreas = [
+  'Haringey',
+  'Wood Green',
+  'Crouch End',
+  'Muswell Hill',
+  'Hornsey',
+  'Finsbury Park',
+  'Tottenham',
+  'Bounds Green',
+  'Highgate',
+  'Harringay',
+  'Islington',
+  'Camden',
+  'Westminster',
+  'Hackney',
+  'Enfield',
+  'City of London',
+];
+
+const setsUsApart = [
+  { title: 'Honest Pricing', description: 'No hidden fees. We quote upfront before we start, and we honour that price every time.' },
+  { title: 'Same-Day Collection', description: 'Call before midday and we can usually be with you the same day. Next-day slots always available.' },
+  { title: 'Reliable & On Time', description: 'We turn up when we say we will. Our reputation depends on it, and our reviews prove it.' },
+  { title: 'Local & Family-Run', description: 'Based in Haringey, we know North London inside out. You deal with real people, not a call centre.' },
+  { title: 'Eco-Responsible', description: `We recycle or responsibly dispose of ${businessInfo.recyclingRate} of everything we collect. Nothing goes to landfill if we can help it.` },
+  { title: 'Fully Licensed', description: `Licensed by the Environment Agency (${businessInfo.licenceNumber}). Waste transfer notes provided for every job.` },
+];
+---
+
+<Layout
+  title="About Us | Family-Run Waste Disposal in North London"
+  description="Easy Waste Disposal is a family-run waste removal company based in Haringey, North London. Licensed, insured, and trusted by hundreds of local homes and businesses."
+  canonical="/about"
+>
+  <div class="space-y-0">
+    <!-- Hero -->
+    <section class="bg-dark relative overflow-hidden">
+      <div class="absolute inset-0 opacity-15">
+        <div class="absolute top-20 right-20 w-[500px] h-[500px] bg-green-500 rounded-full blur-[150px]"></div>
+        <div class="absolute bottom-10 left-10 w-[400px] h-[400px] bg-green-400 rounded-full blur-[120px]"></div>
+      </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-16 lg:py-24">
+        <div class="text-center max-w-3xl mx-auto">
+          <h1 class="text-4xl lg:text-5xl xl:text-6xl font-extrabold leading-tight mb-6 tracking-tight text-white">
+            About <span class="text-green-400">Easy Waste Disposal</span>
+          </h1>
+          <p class="text-lg lg:text-xl text-gray-300 leading-relaxed font-medium">
+            A family-run waste removal company based in Haringey, proudly serving North London, Central London, and beyond. Honest pricing, same-day service, and a commitment to doing things properly.
+          </p>
+          <div class="flex items-center justify-center space-x-2 mb-8">
+            <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+            <div class="flex">{[1,2,3,4,5].map(() => (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#facc15" stroke="#facc15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>))}</div>
+            <span class="text-sm font-bold text-white">{businessInfo.rating}</span>
+            <span class="text-xs text-gray-300 font-medium">{businessInfo.reviewCount}+ Google Reviews</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Who We Are -->
+    <section class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div class="rounded-3xl overflow-hidden aspect-[4/3]">
+            <img
+              src={aboutImage.src}
+              alt={aboutImage.alt}
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <div>
+            <h2 class="text-2xl lg:text-4xl font-extrabold text-dark mb-6 tracking-tight">Who we are</h2>
+            <div class="space-y-4 text-gray-500 leading-relaxed">
+              <p>
+                Easy Waste Disposal started with a single van and a simple idea: provide honest, reliable waste removal at fair prices. Based in Haringey, North London, we've grown into a trusted local business serving homes and businesses across London.
+              </p>
+              <p>
+                We're a family-run team, and every job matters to us personally. Whether it's a single mattress or a full house clearance, we treat every customer the same - with respect, transparency, and a commitment to getting the job done right.
+              </p>
+              <p>
+                We are fully licensed by the Environment Agency (Licence: {businessInfo.licenceNumber}), carry comprehensive insurance, and provide waste transfer notes for every collection. With {businessInfo.yearsExperience} years of experience and {businessInfo.reviewCount}+ five-star Google reviews, our reputation speaks for itself.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What Sets Us Apart -->
+    <section class="py-20 bg-gray-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-14">
+          <h2 class="text-2xl lg:text-4xl font-extrabold text-dark mb-4 tracking-tight">What sets us apart</h2>
+          <p class="text-lg text-gray-500 max-w-2xl mx-auto font-medium">Six reasons local homes and businesses choose us over the rest.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {setsUsApart.map(item => (
+            <div class="bg-white rounded-3xl p-8 shadow-sm border border-gray-100">
+              <div class="flex items-start space-x-4">
+                <div class="flex-shrink-0 mt-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-500"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                </div>
+                <div>
+                  <h3 class="text-lg font-extrabold text-dark mb-2 tracking-tight">{item.title}</h3>
+                  <p class="text-sm text-gray-500 leading-relaxed">{item.description}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Coverage & Hours -->
+    <section class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-14">
+          <h2 class="text-2xl lg:text-4xl font-extrabold text-dark mb-4 tracking-tight">Coverage & opening hours</h2>
+          <p class="text-lg text-gray-500 max-w-2xl mx-auto font-medium">We cover a wide area across London and are available seven days a week.</p>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <!-- Areas Covered -->
+          <div class="bg-green-50 rounded-3xl p-8 border-2 border-green-200">
+            <h3 class="text-xl font-extrabold text-dark mb-6 tracking-tight">Areas we cover</h3>
+            <div class="grid grid-cols-2">
+              {coverageAreas.map((area, i) => (
+                <div class={`flex items-center space-x-2 py-3 ${i < coverageAreas.length - 2 ? 'border-b border-green-200' : ''}`}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-600 flex-shrink-0"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                  <span class="text-sm font-semibold text-dark">{area}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Opening Hours -->
+          <div class="bg-gray-50 rounded-3xl p-8 border-2 border-gray-200">
+            <h3 class="text-xl font-extrabold text-dark mb-6 tracking-tight">Opening hours</h3>
+            <table class="w-full">
+              <tbody>
+                {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map(day => (
+                  <tr class="border-b border-gray-200 last:border-0">
+                    <td class="py-3 text-sm font-semibold text-dark">{day}</td>
+                    <td class="py-3 text-sm text-gray-500 text-right">7:00 AM - 8:00 PM</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 bg-gray-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-14">
+          <h2 class="text-2xl lg:text-4xl font-extrabold text-dark mb-4 tracking-tight">Frequently asked questions</h2>
+          <p class="text-lg text-gray-500 max-w-2xl mx-auto">Everything you need to know about our waste disposal services.</p>
+        </div>
+        <div class="max-w-3xl mx-auto space-y-4">
+          {aboutFaqs.map(faq => (
+            <details class="group bg-gray-50 rounded-2xl border border-gray-200 shadow-sm">
+              <summary class="flex items-center justify-between cursor-pointer px-6 py-5 text-dark font-bold text-sm list-none">
+                {faq.question}
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400 group-open:rotate-180 transition-transform flex-shrink-0 ml-4"><path d="m6 9 6 6 6-6"/></svg>
+              </summary>
+              <div class="px-6 pb-5">
+                <p class="text-sm text-gray-500 leading-relaxed">{faq.answer}</p>
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl lg:text-4xl font-extrabold text-dark mb-12 tracking-tight text-center">What our customers say</h2>
+        <div class="text-center mb-12">
+          <div class="inline-flex items-center space-x-3 mb-4">
+            <svg width="36" height="36" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+            <div class="flex items-center space-x-2">
+              <div class="flex">
+                {[1,2,3,4,5].map(() => (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="#facc15" stroke="#facc15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                ))}
+              </div>
+              <span class="text-3xl font-extrabold text-dark tracking-tight">{businessInfo.rating}</span>
+            </div>
+          </div>
+          <p class="text-lg font-bold text-dark tracking-wide">{businessInfo.reviewCount}+ Google Reviews</p>
+          <p class="text-base text-gray-500 mt-2 font-medium">We're proud of our reputation and work hard to maintain it with every single job.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {reviews.map(review => (
+            <div class="bg-dark rounded-3xl p-8 text-white shadow-sm hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] transition-all duration-300 hover:-translate-y-1">
+              <div class="flex items-center space-x-2 mb-4">
+                <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                <div class="flex">
+                  {[1,2,3,4,5].map(() => (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="#facc15" stroke="#facc15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  ))}
+                </div>
+              </div>
+              <p class="text-sm leading-relaxed mb-4 text-gray-300 italic">"{review.text}"</p>
+              <p class="text-sm font-bold text-gray-400">{review.name} <span class="text-gray-500 font-normal">- {review.location}</span></p>
+            </div>
+          ))}
+        </div>
+
+        <div class="text-center mt-8">
+          <a href="https://www.google.com/maps/place/Easy+Waste+Disposal" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 text-sm font-semibold text-green-600 hover:text-green-700 transition-colors">
+            <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+            <span>See all reviews on Google</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>

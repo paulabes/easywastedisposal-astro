@@ -1,0 +1,192 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { businessInfo } from '../data/locations';
+
+const sidebarLinks = [
+  { href: '#introduction', label: 'Introduction' },
+  { href: '#information-we-collect', label: 'Information we collect' },
+  { href: '#how-we-use', label: 'How we use it' },
+  { href: '#cookies', label: 'Cookies' },
+  { href: '#third-party', label: 'Third-party services' },
+  { href: '#data-retention', label: 'Data retention' },
+  { href: '#your-rights', label: 'Your rights' },
+  { href: '#contact', label: 'Contact us' },
+];
+---
+
+<Layout
+  title="Privacy Policy"
+  description="Privacy Policy for Easy Waste Disposal. Learn how we collect, use, and protect your personal information."
+  canonical="/privacy"
+>
+  <div class="space-y-0">
+    <!-- Hero -->
+    <section class="bg-dark relative overflow-hidden">
+      <div class="absolute inset-0 opacity-15">
+        <div class="absolute top-20 right-20 w-[500px] h-[500px] bg-green-500 rounded-full blur-[150px]"></div>
+      </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-16 lg:py-20">
+        <div class="text-center max-w-3xl mx-auto">
+          <h1 class="text-4xl lg:text-5xl font-extrabold leading-tight mb-4 tracking-tight text-white">Privacy Policy</h1>
+          <p class="text-lg text-gray-300 font-medium">How we collect, use, and protect your personal information.</p>
+          <div class="flex items-center justify-center space-x-2 mb-8">
+            <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+            <div class="flex">{[1,2,3,4,5].map(() => (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#facc15" stroke="#facc15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>))}</div>
+            <span class="text-sm font-bold text-white">{businessInfo.rating}</span>
+            <span class="text-xs text-gray-300 font-medium">{businessInfo.reviewCount}+ Google Reviews</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content -->
+    <section class="py-16 lg:py-20 bg-gray-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-12">
+          <!-- Sidebar -->
+          <div class="lg:col-span-1">
+            <nav class="lg:sticky lg:top-24">
+              <h3 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">On this page</h3>
+              <ul class="space-y-2">
+                {sidebarLinks.map(link => (
+                  <li>
+                    <a href={link.href} class="text-sm text-gray-500 hover:text-green-600 transition-colors block py-1">{link.label}</a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
+
+          <!-- Main Content -->
+          <div class="lg:col-span-3 space-y-12">
+            <div id="introduction">
+              <h2 class="text-2xl font-extrabold text-dark mb-4 tracking-tight">Introduction</h2>
+              <div class="space-y-4 text-gray-600 leading-relaxed text-sm">
+                <p>
+                  Easy Waste Disposal ("we", "our", "us") is committed to protecting and respecting your privacy. This policy explains how we collect, use, and safeguard your personal information when you use our website or services.
+                </p>
+                <p>
+                  This policy applies to information we collect through our website at easywastedisposal.co.uk, over the phone, via email, through WhatsApp, and through any other communication channels we use to provide our services.
+                </p>
+                <p>
+                  By using our website or services, you consent to the collection and use of your information as described in this policy. If you do not agree with this policy, please do not use our website or services.
+                </p>
+              </div>
+            </div>
+
+            <div id="information-we-collect">
+              <h2 class="text-2xl font-extrabold text-dark mb-4 tracking-tight">Information we collect</h2>
+              <div class="space-y-4 text-gray-600 leading-relaxed text-sm">
+                <p>We may collect the following types of personal information:</p>
+                <ul class="list-disc list-inside space-y-2 ml-2">
+                  <li><strong>Contact information:</strong> Your name, phone number, email address, and property address when you request a quote or book a collection.</li>
+                  <li><strong>Service information:</strong> Details about the waste collection service you require, including the type and volume of waste, preferred dates and times, and access information.</li>
+                  <li><strong>Payment information:</strong> Payment details necessary to process transactions. We do not store full card details on our systems.</li>
+                  <li><strong>Communication records:</strong> Records of phone calls, emails, WhatsApp messages, and any other correspondence between you and our team.</li>
+                  <li><strong>Website usage data:</strong> Information about how you use our website, including pages visited, time spent on pages, and referring websites. This data is collected through cookies and similar technologies.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div id="how-we-use">
+              <h2 class="text-2xl font-extrabold text-dark mb-4 tracking-tight">How we use your information</h2>
+              <div class="space-y-4 text-gray-600 leading-relaxed text-sm">
+                <p>We use your personal information for the following purposes:</p>
+                <ul class="list-disc list-inside space-y-2 ml-2">
+                  <li>To provide quotes and process bookings for our waste collection services.</li>
+                  <li>To communicate with you about your booking, including confirmations, scheduling, and follow-ups.</li>
+                  <li>To process payments for services rendered.</li>
+                  <li>To issue waste transfer notes and other documentation required by law.</li>
+                  <li>To improve our website and services based on usage patterns and feedback.</li>
+                  <li>To comply with legal obligations, including Environment Agency regulations and waste management legislation.</li>
+                </ul>
+                <p>We will never sell your personal information to third parties or use it for purposes unrelated to our services without your explicit consent.</p>
+              </div>
+            </div>
+
+            <div id="cookies">
+              <h2 class="text-2xl font-extrabold text-dark mb-4 tracking-tight">Cookies</h2>
+              <div class="space-y-4 text-gray-600 leading-relaxed text-sm">
+                <p>
+                  Our website uses cookies - small text files stored on your device - to improve your browsing experience and help us understand how our website is used.
+                </p>
+                <p>We use the following types of cookies:</p>
+                <ul class="list-disc list-inside space-y-2 ml-2">
+                  <li><strong>Essential cookies:</strong> Required for the website to function properly. These cannot be disabled.</li>
+                  <li><strong>Analytics cookies:</strong> Help us understand how visitors interact with our website. We use Google Analytics to collect anonymous usage data.</li>
+                  <li><strong>Marketing cookies:</strong> Used to track the effectiveness of our advertising and to deliver relevant content.</li>
+                </ul>
+                <p>
+                  You can control cookies through your browser settings. Disabling certain cookies may affect the functionality of our website.
+                </p>
+              </div>
+            </div>
+
+            <div id="third-party">
+              <h2 class="text-2xl font-extrabold text-dark mb-4 tracking-tight">Third-party services</h2>
+              <div class="space-y-4 text-gray-600 leading-relaxed text-sm">
+                <p>We may share your information with the following third-party services:</p>
+                <ul class="list-disc list-inside space-y-2 ml-2">
+                  <li><strong>Google Analytics:</strong> For website usage analysis. Google's privacy policy applies to data collected through Analytics.</li>
+                  <li><strong>Payment processors:</strong> To securely process card payments. These processors comply with PCI-DSS standards.</li>
+                  <li><strong>WhatsApp (Meta):</strong> When you contact us via WhatsApp, Meta's privacy policy applies to messages sent through their platform.</li>
+                  <li><strong>Licensed waste facilities:</strong> We may share your address with waste transfer stations as required for waste transfer documentation and regulatory compliance.</li>
+                </ul>
+                <p>We only share the minimum information necessary for each service to function, and we ensure all third parties handle your data responsibly.</p>
+              </div>
+            </div>
+
+            <div id="data-retention">
+              <h2 class="text-2xl font-extrabold text-dark mb-4 tracking-tight">Data retention</h2>
+              <div class="space-y-4 text-gray-600 leading-relaxed text-sm">
+                <p>
+                  We retain your personal information only for as long as necessary to fulfil the purposes for which it was collected, or as required by law.
+                </p>
+                <ul class="list-disc list-inside space-y-2 ml-2">
+                  <li><strong>Service records and waste transfer notes:</strong> Retained for a minimum of 3 years as required by waste management regulations.</li>
+                  <li><strong>Financial records:</strong> Retained for 6 years as required by HMRC.</li>
+                  <li><strong>Marketing and communication preferences:</strong> Retained until you withdraw your consent or request deletion.</li>
+                  <li><strong>Website analytics data:</strong> Retained for up to 26 months.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div id="your-rights">
+              <h2 class="text-2xl font-extrabold text-dark mb-4 tracking-tight">Your rights</h2>
+              <div class="space-y-4 text-gray-600 leading-relaxed text-sm">
+                <p>Under UK data protection law (UK GDPR), you have the following rights:</p>
+                <ul class="list-disc list-inside space-y-2 ml-2">
+                  <li><strong>Right of access:</strong> You can request a copy of the personal information we hold about you.</li>
+                  <li><strong>Right to rectification:</strong> You can ask us to correct any inaccurate or incomplete information.</li>
+                  <li><strong>Right to erasure:</strong> You can ask us to delete your personal information, subject to legal retention requirements.</li>
+                  <li><strong>Right to restrict processing:</strong> You can ask us to limit how we use your data.</li>
+                  <li><strong>Right to data portability:</strong> You can request your data in a structured, machine-readable format.</li>
+                  <li><strong>Right to object:</strong> You can object to the processing of your personal data for certain purposes.</li>
+                </ul>
+                <p>
+                  To exercise any of these rights, please contact us using the details below. We will respond to your request within one month.
+                </p>
+              </div>
+            </div>
+
+            <div id="contact">
+              <h2 class="text-2xl font-extrabold text-dark mb-4 tracking-tight">Contact us</h2>
+              <div class="space-y-4 text-gray-600 leading-relaxed text-sm">
+                <p>If you have any questions about this privacy policy or wish to exercise your data protection rights, please contact us:</p>
+                <ul class="space-y-2 ml-2">
+                  <li><strong>Email:</strong> <a href={`mailto:${businessInfo.email}`} class="text-green-600 hover:text-green-700 transition-colors">{businessInfo.email}</a></li>
+                  <li><strong>Phone:</strong> <a href={businessInfo.phoneHref} class="text-green-600 hover:text-green-700 transition-colors">{businessInfo.phone}</a></li>
+                  <li><strong>Address:</strong> {businessInfo.address}</li>
+                </ul>
+                <p>
+                  If you are not satisfied with our response, you have the right to lodge a complaint with the Information Commissioner's Office (ICO) at <a href="https://ico.org.uk" target="_blank" rel="noopener noreferrer" class="text-green-600 hover:text-green-700 transition-colors">ico.org.uk</a>.
+                </p>
+                <p class="text-gray-400 text-xs mt-8">This policy was last updated on 1 January 2025.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>
