@@ -38,6 +38,7 @@ const serviceIcons: Record<string, string> = {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{fullTitle}</title>
     <meta name="description" content={truncatedDesc} />
+    <meta name="robots" content="noindex, nofollow" />
     {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
 
     <meta property="og:title" content={fullTitle} />
