@@ -75,15 +75,15 @@ export const Header: React.FC = () => {
               </a>
             </div>
 
-            <nav className="hidden 2xl:flex items-center justify-center space-x-1 absolute left-1/2 -translate-x-1/2">
-              <a href="/" className="px-4 py-2 rounded-xl text-sm font-bold text-gray-700 hover:text-dark hover:bg-gray-50 transition-all">Home</a>
-              <a href="/about" className="px-4 py-2 rounded-xl text-sm font-bold text-gray-700 hover:text-dark hover:bg-gray-50 transition-all">About</a>
+            <nav className="hidden lg:flex items-center space-x-0.5 xl:space-x-1 ml-6">
+              <a href="/" className="px-3 xl:px-4 py-2 rounded-xl text-sm font-bold text-gray-700 hover:text-dark hover:bg-gray-50 transition-all">Home</a>
+              <a href="/about" className="px-3 xl:px-4 py-2 rounded-xl text-sm font-bold text-gray-700 hover:text-dark hover:bg-gray-50 transition-all">About</a>
 
               {/* Services Mega */}
               <div className="relative">
                 <button
                   onClick={() => setActiveMega(activeMega === 'services' ? null : 'services')}
-                  className={`px-4 py-2 rounded-xl text-sm font-bold transition-all duration-200 flex items-center space-x-1.5 cursor-pointer ${activeMega === 'services' ? 'text-green-700 bg-green-50' : 'text-gray-700 hover:text-dark hover:bg-gray-50'}`}
+                  className={`px-3 xl:px-4 py-2 rounded-xl text-sm font-bold transition-all duration-200 flex items-center space-x-1.5 cursor-pointer ${activeMega === 'services' ? 'text-green-700 bg-green-50' : 'text-gray-700 hover:text-dark hover:bg-gray-50'}`}
                 >
                   <span>Services</span>
                   <ChevronDown size={14} className={`fill-current transition-transform duration-200 ${activeMega === 'services' ? 'rotate-180' : ''}`} />
@@ -123,7 +123,7 @@ export const Header: React.FC = () => {
               <div className="relative">
                 <button
                   onClick={() => setActiveMega(activeMega === 'locations' ? null : 'locations')}
-                  className={`px-4 py-2 rounded-xl text-sm font-bold transition-all duration-200 flex items-center space-x-1.5 cursor-pointer ${activeMega === 'locations' ? 'text-green-700 bg-green-50' : 'text-gray-700 hover:text-dark hover:bg-gray-50'}`}
+                  className={`px-3 xl:px-4 py-2 rounded-xl text-sm font-bold transition-all duration-200 flex items-center space-x-1.5 cursor-pointer ${activeMega === 'locations' ? 'text-green-700 bg-green-50' : 'text-gray-700 hover:text-dark hover:bg-gray-50'}`}
                 >
                   <span>Locations</span>
                   <ChevronDown size={14} className={`fill-current transition-transform duration-200 ${activeMega === 'locations' ? 'rotate-180' : ''}`} />
@@ -163,22 +163,22 @@ export const Header: React.FC = () => {
                 )}
               </div>
 
-              <a href="/contact" className="px-4 py-2 rounded-xl text-sm font-bold text-gray-700 hover:text-dark hover:bg-gray-50 transition-all">Contact</a>
+              <a href="/contact" className="px-3 xl:px-4 py-2 rounded-xl text-sm font-bold text-gray-700 hover:text-dark hover:bg-gray-50 transition-all">Contact</a>
             </nav>
 
-            <div className="hidden 2xl:flex items-center justify-end space-x-3 flex-shrink-0">
+            <div className="hidden lg:flex items-center justify-end space-x-2 xl:space-x-3 flex-shrink-0">
               <a href={businessInfo.phoneHref}>
-                <Button variant="dark" size="md"><Phone size={14} className="mr-1.5" />{businessInfo.phone}</Button>
+                <Button variant="dark" size="md"><Phone size={14} className="xl:mr-1.5" /><span className="hidden xl:inline">{businessInfo.phone}</span></Button>
               </a>
               <a href={businessInfo.whatsapp} target="_blank" rel="noopener noreferrer">
-                <Button variant="whatsapp" size="md"><MessageCircle size={14} className="mr-1.5" />WhatsApp</Button>
+                <Button variant="whatsapp" size="md"><MessageCircle size={14} className="xl:mr-1.5" /><span className="hidden xl:inline">WhatsApp</span></Button>
               </a>
               <a href="/contact#quote">
-                <Button size="md">Free Quote <ArrowRight size={16} className="ml-2" /></Button>
+                <Button size="md"><span className="hidden xl:inline">Free Quote</span><span className="xl:hidden">Quote</span> <ArrowRight size={16} className="ml-1 xl:ml-2" /></Button>
               </a>
             </div>
 
-            <div className="2xl:hidden flex items-center ml-auto">
+            <div className="lg:hidden flex items-center ml-auto">
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="p-2 rounded-xl text-gray-600 hover:bg-gray-100 transition-colors"
@@ -191,7 +191,7 @@ export const Header: React.FC = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="2xl:hidden fixed inset-0 top-[60px] z-40 bg-white overflow-y-auto overflow-x-hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="lg:hidden fixed inset-0 top-[60px] z-40 bg-white overflow-y-auto overflow-x-hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             <div className="px-6 py-8">
               <nav className="space-y-1 mb-8">
                 <a href="/" className="flex items-center justify-between px-4 py-3 text-lg font-bold text-dark hover:bg-gray-50 rounded-2xl transition-colors">
