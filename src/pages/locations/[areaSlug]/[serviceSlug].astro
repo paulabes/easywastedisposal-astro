@@ -231,30 +231,26 @@ const otherServices = allServices.filter(s => s.slug !== service.slug);
 
     <!-- Compliance Section (conditional) -->
     {isCompliance && (
-      <section class="py-20 bg-gray-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="text-center mb-12">
-            <h2 class="text-2xl lg:text-4xl font-extrabold text-dark mb-4 tracking-tight">Full compliance and documentation</h2>
-            <p class="text-lg text-gray-500 leading-relaxed max-w-2xl mx-auto">
-              Every business has a legal duty of care when it comes to waste disposal. We make compliance easy by providing full documentation with every collection.
-            </p>
+      <section class="py-20 bg-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
+          <div class="text-center mb-16">
+            <h2 class="text-2xl lg:text-4xl font-extrabold mb-4 tracking-tight">Full compliance documentation</h2>
+            <p class="text-lg text-green-100 max-w-2xl mx-auto font-medium">Meeting your business's duty of care obligations for waste management.</p>
           </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {[
-              { title: 'Waste Transfer Notes', desc: 'Provided for every collection as proof of legal disposal.' },
-              { title: 'Duty of Care Documentation', desc: 'Complete audit trail for your business records.' },
-              { title: 'Environment Agency Licensed', desc: `Licence number ${businessInfo.licenceNumber}.` },
-              { title: 'WEEE Compliance', desc: 'IT equipment and electronics disposed of to WEEE standards.' },
+              'Waste transfer notes for every collection',
+              'Duty of care documentation provided',
+              `Environment Agency Licence: ${businessInfo.licenceNumber}`,
+              businessInfo.insuranceCover,
+              'WEEE-compliant IT equipment disposal',
+              'Complete audit trail for your records',
             ].map(item => (
-              <div class="flex items-start space-x-3 bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-600 flex-shrink-0 mt-0.5"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
-                  <div>
-                    <h3 class="font-bold text-dark">{item.title}</h3>
-                    <p class="text-gray-500">{item.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+              <div class="flex items-start space-x-3 bg-white/10 border border-white/20 rounded-2xl p-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-400 flex-shrink-0 mt-0.5"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+                <span class="text-sm text-gray-300 font-medium">{item}</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
