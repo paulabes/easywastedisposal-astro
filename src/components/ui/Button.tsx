@@ -18,14 +18,14 @@ export const Button: React.FC<ButtonProps> = ({
   disabled,
   ...props
 }) => {
-  const baseStyles = "inline-flex items-center justify-center font-bold tracking-wide transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed rounded-2xl hover:-translate-y-0.5 active:translate-y-0";
+  const baseStyles = "inline-flex items-center justify-center font-bold tracking-wide transition-all duration-300 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed rounded-2xl hover:-translate-y-0.5 active:translate-y-0";
 
   const variants = {
-    green: "bg-green-600 text-white hover:bg-green-500 hover:shadow-[0_8px_20px_rgba(22,163,74,0.3)] shadow-md focus:ring-green-500 border border-green-500",
-    dark: "bg-dark text-white hover:bg-dark-50 hover:shadow-[0_8px_20px_rgba(15,42,29,0.4)] shadow-md focus:ring-dark",
-    white: "bg-white text-dark hover:bg-gray-50 hover:shadow-[0_8px_20px_rgba(0,0,0,0.1)] shadow-md focus:ring-gray-300 border border-gray-200",
-    whatsapp: "bg-[#25D366] text-white hover:bg-[#20BE5C] hover:shadow-[0_8px_20px_rgba(37,211,102,0.4)] shadow-md focus:ring-[#25D366]",
-    tel: "bg-white text-dark hover:bg-gray-50 hover:shadow-[0_8px_20px_rgba(0,0,0,0.1)] shadow-md focus:ring-gray-300 border border-gray-200",
+    green: "bg-green-600 text-white hover:bg-green-500 hover:shadow-[0_8px_20px_rgba(22,163,74,0.3)] shadow-md border border-green-500",
+    dark: "bg-dark text-white hover:bg-dark-50 hover:shadow-[0_8px_20px_rgba(15,42,29,0.4)] shadow-md",
+    white: "bg-white text-dark hover:bg-gray-50 hover:shadow-[0_8px_20px_rgba(0,0,0,0.1)] shadow-md border border-gray-200",
+    whatsapp: "bg-[#25D366] text-white hover:bg-[#20BE5C] hover:shadow-[0_8px_20px_rgba(37,211,102,0.4)] shadow-md",
+    tel: "bg-white text-dark hover:bg-gray-50 hover:shadow-[0_8px_20px_rgba(0,0,0,0.1)] shadow-md border border-gray-200",
   };
 
   const sizes = {
