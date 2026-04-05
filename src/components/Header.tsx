@@ -75,7 +75,7 @@ export const Header: React.FC = () => {
               </a>
             </div>
 
-            <nav className="hidden xl:flex items-center justify-center space-x-1 absolute left-1/2 -translate-x-1/2">
+            <nav className="hidden 2xl:flex items-center justify-center space-x-1 absolute left-1/2 -translate-x-1/2">
               <a href="/" className="px-4 py-2 rounded-xl text-sm font-bold text-gray-700 hover:text-dark hover:bg-gray-50 transition-all">Home</a>
               <a href="/about" className="px-4 py-2 rounded-xl text-sm font-bold text-gray-700 hover:text-dark hover:bg-gray-50 transition-all">About</a>
 
@@ -166,16 +166,21 @@ export const Header: React.FC = () => {
               <a href="/contact" className="px-4 py-2 rounded-xl text-sm font-bold text-gray-700 hover:text-dark hover:bg-gray-50 transition-all">Contact</a>
             </nav>
 
-            <div className="hidden xl:flex items-center justify-end space-x-3 flex-shrink-0">
+            <div className="hidden 2xl:flex items-center justify-end space-x-3 flex-shrink-0">
               <a href={businessInfo.phoneHref}>
                 <Button variant="dark" size="md"><Phone size={14} className="mr-1.5" />{businessInfo.phone}</Button>
+              </a>
+              <a href={businessInfo.whatsapp} target="_blank" rel="noopener noreferrer">
+                <button className="inline-flex items-center justify-center font-bold tracking-wide transition-all duration-300 rounded-2xl bg-[#25D366] text-white hover:bg-[#20BE5C] shadow-md px-4 py-2.5 text-sm hover:-translate-y-0.5">
+                  <MessageCircle size={14} className="mr-1.5" />WhatsApp
+                </button>
               </a>
               <a href="/contact#quote">
                 <Button size="md">Free Quote <ArrowRight size={16} className="ml-2" /></Button>
               </a>
             </div>
 
-            <div className="xl:hidden flex items-center ml-auto">
+            <div className="2xl:hidden flex items-center ml-auto">
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="p-2 rounded-xl text-gray-600 hover:bg-gray-100 transition-colors"
@@ -188,7 +193,7 @@ export const Header: React.FC = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="xl:hidden fixed inset-0 top-[60px] z-40 bg-white overflow-y-auto overflow-x-hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="2xl:hidden fixed inset-0 top-[60px] z-40 bg-white overflow-y-auto overflow-x-hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             <div className="px-6 py-8">
               <nav className="space-y-1 mb-8">
                 <a href="/" className="flex items-center justify-between px-4 py-3 text-lg font-bold text-dark hover:bg-gray-50 rounded-2xl transition-colors">
