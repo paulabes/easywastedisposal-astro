@@ -171,9 +171,7 @@ export const Header: React.FC = () => {
                 <Button variant="dark" size="md"><Phone size={14} className="mr-1.5" />{businessInfo.phone}</Button>
               </a>
               <a href={businessInfo.whatsapp} target="_blank" rel="noopener noreferrer">
-                <button className="inline-flex items-center justify-center font-bold tracking-wide transition-all duration-300 rounded-2xl bg-[#25D366] text-white hover:bg-[#20BE5C] shadow-md px-4 py-2.5 text-sm hover:-translate-y-0.5">
-                  <MessageCircle size={14} className="mr-1.5" />WhatsApp
-                </button>
+                <Button variant="whatsapp" size="md"><MessageCircle size={14} className="mr-1.5" />WhatsApp</Button>
               </a>
               <a href="/contact#quote">
                 <Button size="md">Free Quote <ArrowRight size={16} className="ml-2" /></Button>
@@ -215,7 +213,7 @@ export const Header: React.FC = () => {
                   </button>
                   {mobileExpanded === 'services' && (
                     <div className="-mx-6 pt-2 pb-6">
-                      <div className="bg-gray-100 divide-y divide-white">
+                      <div className="bg-gray-100 divide-y divide-white py-4">
                         {allServices.map(s => {
                           const SIcon = serviceIcons[s.slug];
                           return (
@@ -244,7 +242,7 @@ export const Header: React.FC = () => {
                   </button>
                   {mobileExpanded === 'locations' && (
                     <div className="-mx-6 pt-2 pb-6">
-                      <div className="bg-gray-100 divide-y divide-white">
+                      <div className="bg-gray-100 divide-y divide-white py-4">
                         {regions.flatMap(r => r.areas).map(area => (
                           <a key={area.slug} href={`/locations/${area.slug}`} className="flex items-center space-x-2 px-10 py-3 hover:bg-gray-200 transition-colors">
                             <MapPin size={14} className="text-green-600 flex-shrink-0" />
