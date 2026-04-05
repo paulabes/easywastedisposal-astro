@@ -83,7 +83,7 @@ export const Header: React.FC = () => {
               <div className="relative">
                 <button
                   onClick={() => setActiveMega(activeMega === 'services' ? null : 'services')}
-                  className={`px-4 py-2 rounded-xl text-sm font-bold transition-all duration-200 flex items-center space-x-1.5 ${activeMega === 'services' ? 'text-green-700 bg-green-50' : 'text-gray-700 hover:text-dark hover:bg-gray-50'}`}
+                  className={`px-4 py-2 rounded-xl text-sm font-bold transition-all duration-200 flex items-center space-x-1.5 cursor-pointer ${activeMega === 'services' ? 'text-green-700 bg-green-50' : 'text-gray-700 hover:text-dark hover:bg-gray-50'}`}
                 >
                   <span>Services</span>
                   <ChevronDown size={14} className={`fill-current transition-transform duration-200 ${activeMega === 'services' ? 'rotate-180' : ''}`} />
@@ -123,7 +123,7 @@ export const Header: React.FC = () => {
               <div className="relative">
                 <button
                   onClick={() => setActiveMega(activeMega === 'locations' ? null : 'locations')}
-                  className={`px-4 py-2 rounded-xl text-sm font-bold transition-all duration-200 flex items-center space-x-1.5 ${activeMega === 'locations' ? 'text-green-700 bg-green-50' : 'text-gray-700 hover:text-dark hover:bg-gray-50'}`}
+                  className={`px-4 py-2 rounded-xl text-sm font-bold transition-all duration-200 flex items-center space-x-1.5 cursor-pointer ${activeMega === 'locations' ? 'text-green-700 bg-green-50' : 'text-gray-700 hover:text-dark hover:bg-gray-50'}`}
                 >
                   <span>Locations</span>
                   <ChevronDown size={14} className={`fill-current transition-transform duration-200 ${activeMega === 'locations' ? 'rotate-180' : ''}`} />
