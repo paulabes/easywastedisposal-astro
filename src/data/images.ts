@@ -62,6 +62,10 @@ export const locationImages: Record<string, { src: string; alt: string }> = {
     src: '/images/bulky-waste-collection-hackney.jpg',
     alt: 'Bulky waste collection in Hackney',
   },
+  'islington': {
+    src: '/images/waste-disposal-islington-n1.jpg',
+    alt: 'Waste disposal service in Islington, N1',
+  },
 };
 
 export const defaultLocationImage = {

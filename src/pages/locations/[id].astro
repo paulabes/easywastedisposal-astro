@@ -107,7 +107,7 @@ const postcodes = area.postcodes.join(', ');
             <img
               src={locationImages[id!]?.src || defaultLocationImage.src}
               alt={locationImages[id!]?.alt || `Waste disposal service in ${locationName}`}
-              class="w-full h-auto object-contain"
+              class="w-full h-auto object-cover aspect-[3/2] rounded-2xl"
             />
           </div>
           <div>
