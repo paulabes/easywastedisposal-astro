@@ -431,6 +431,7 @@ export const businessInfo = {
   recyclingRate: '98%',
   insuranceCover: 'Fully insured with employers liability cover',
   priceFrom: '£40',
+  googleReviewsUrl: 'https://www.google.com/maps/place/Easy+Waste+Disposal/@51.5,-0.1/reviews',
   tagline: 'Easy And Reliable Rubbish Removal London',
   subTagline: 'Same-day collections • Price match guarantee • Licensed waste carriers',
 };

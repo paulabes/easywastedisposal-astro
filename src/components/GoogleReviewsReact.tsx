@@ -26,7 +26,7 @@ export const GoogleReviewsReact: React.FC<GoogleReviewsProps> = ({ size = 'md', 
   const labelSize = size === 'sm' ? 'text-[10px]' : size === 'md' ? 'text-xs' : 'text-sm';
 
   return (
-    <div className="flex items-center space-x-2">
+    <a href={businessInfo.googleReviewsUrl} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 cursor-pointer hover:opacity-80 transition-opacity">
       <GoogleLogoSvg size={logoSize} />
       <div className="flex items-center space-x-1.5">
         <div className="flex">
@@ -35,6 +35,6 @@ export const GoogleReviewsReact: React.FC<GoogleReviewsProps> = ({ size = 'md', 
         <span className={`${textSizeClass} font-bold ${textColor}`}>{businessInfo.rating}</span>
         <span className={`${labelSize} ${subColor} font-medium`}>{businessInfo.reviewCount}+ Google Reviews</span>
       </div>
-    </div>
+    </a>
   );
 };
