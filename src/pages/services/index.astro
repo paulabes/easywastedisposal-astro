@@ -11,7 +11,6 @@ import { heroImage } from '../../data/images';
   description={`All waste disposal services in London: rubbish removal, house clearance, garden waste, builders waste, commercial waste. Same-day collection from ${businessInfo.priceFrom}.`}
   canonical="/services"
 >
-  <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Services' }]} />
   <div class="space-y-0">
     <!-- Hero -->
     <section class="bg-dark relative overflow-hidden">
@@ -22,8 +21,8 @@ import { heroImage } from '../../data/images';
         <div class="absolute top-20 right-20 w-[500px] h-[500px] bg-green-500 rounded-full blur-[150px]"></div>
         <div class="absolute bottom-10 left-10 w-[400px] h-[400px] bg-green-400 rounded-full blur-[120px]"></div>
       </div>
-
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-16 lg:py-24">
+      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Services' }]} />
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-10 lg:py-20">
         <div class="text-center text-white max-w-3xl mx-auto">
           <div class="inline-flex items-center space-x-2 bg-green-500/10 border border-green-500/20 px-3.5 py-2 rounded-full text-xs font-bold text-green-400 mb-6 tracking-wide">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>

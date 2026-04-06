@@ -85,7 +85,6 @@ const aboutFaqSchema = {
   canonical="/about"
   schema={aboutFaqSchema}
 >
-  <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'About Us' }]} />
   <div class="space-y-0">
     <!-- Hero -->
     <section class="bg-dark relative overflow-hidden">
@@ -93,7 +92,8 @@ const aboutFaqSchema = {
         <div class="absolute top-20 right-20 w-[500px] h-[500px] bg-green-500 rounded-full blur-[150px]"></div>
         <div class="absolute bottom-10 left-10 w-[400px] h-[400px] bg-green-400 rounded-full blur-[120px]"></div>
       </div>
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-16 lg:py-24">
+      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'About Us' }]} />
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-10 lg:py-20">
         <div class="text-center max-w-3xl mx-auto">
           <h1 class="text-4xl lg:text-5xl xl:text-6xl font-extrabold leading-tight mb-6 tracking-tight text-white">
             About <span class="text-green-400">Easy Waste Disposal</span>
