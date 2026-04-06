@@ -1,5 +1,6 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
 import ServiceIcon from '../../../components/ServiceIcon.astro';
 import { QuoteForm } from '../../../components/QuoteForm';
 import { areas, servicesMeta, allServices, getArea, regions, businessInfo, type ServiceSlug } from '../../../data/locations';
@@ -32,13 +33,53 @@ const isNextDay = ['house-clearance', 'office-clearance'].includes(service.slug)
 const availability = isNextDay ? 'Next-Day' : 'Same-Day';
 
 const otherServices = allServices.filter(s => s.slug !== service.slug);
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  'name': `${service.name} in ${area.name}`,
+  'description': content.heroDescription,
+  'url': `https://easywastedisposal.co.uk/locations/${areaSlug}/${serviceSlug}`,
+  'serviceType': service.name,
+  'provider': { '@id': 'https://easywastedisposal.co.uk/#organization' },
+  'areaServed': {
+    '@type': 'AdministrativeArea',
+    'name': area.name,
+    'address': {
+      '@type': 'PostalAddress',
+      'addressLocality': area.name,
+      'addressRegion': 'London',
+      'addressCountry': 'GB',
+    },
+  },
+  'offers': {
+    '@type': 'Offer',
+    'priceCurrency': 'GBP',
+    'price': service.priceFrom.replace('£', ''),
+    'availability': 'https://schema.org/InStock',
+  },
+};
+
+const faqSchema = service.faqs && service.faqs.length > 0 ? {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': service.faqs.map(faq => ({
+    '@type': 'Question',
+    'name': faq.question,
+    'acceptedAnswer': { '@type': 'Answer', 'text': faq.answer },
+  })),
+} : null;
+
+const schemas = [serviceSchema, faqSchema].filter(Boolean);
 ---
 
 <Layout
   title={`${service.name} ${area.name} ${postcodes} | ${availability} Collection`}
   description={content.heroDescription}
   canonical={`/locations/${areaSlug}/${serviceSlug}`}
+  schema={schemas}
 >
+  <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Locations', href: '/locations' }, { label: area.name, href: `/locations/${areaSlug}` }, { label: service.name }]} />
   <div class="space-y-0">
     <!-- Hero -->
     <section class="bg-dark relative overflow-hidden">

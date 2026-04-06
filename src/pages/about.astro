@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 import { businessInfo } from '../data/locations';
 import { aboutImage } from '../data/images';
 
@@ -66,13 +67,25 @@ const setsUsApart = [
   { title: 'Eco-Responsible', description: `We recycle or responsibly dispose of ${businessInfo.recyclingRate} of everything we collect. Nothing goes to landfill if we can help it.` },
   { title: 'Fully Licensed', description: `Licensed by the Environment Agency (${businessInfo.licenceNumber}). Waste transfer notes provided for every job.` },
 ];
+
+const aboutFaqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': aboutFaqs.map(faq => ({
+    '@type': 'Question',
+    'name': faq.question,
+    'acceptedAnswer': { '@type': 'Answer', 'text': faq.answer },
+  })),
+};
 ---
 
 <Layout
   title="About Us | Family-Run Waste Disposal in North London"
   description="Easy Waste Disposal is a family-run waste removal company based in Haringey, North London. Licensed, insured, and trusted by hundreds of local homes and businesses."
   canonical="/about"
+  schema={aboutFaqSchema}
 >
+  <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'About Us' }]} />
   <div class="space-y-0">
     <!-- Hero -->
     <section class="bg-dark relative overflow-hidden">

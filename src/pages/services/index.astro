@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import ServiceIcon from '../../components/ServiceIcon.astro';
 import { allServices, businessInfo } from '../../data/locations';
 import { heroImage } from '../../data/images';
@@ -10,6 +11,7 @@ import { heroImage } from '../../data/images';
   description={`All waste disposal services in London: rubbish removal, house clearance, garden waste, builders waste, commercial waste. Same-day collection from ${businessInfo.priceFrom}.`}
   canonical="/services"
 >
+  <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Services' }]} />
   <div class="space-y-0">
     <!-- Hero -->
     <section class="bg-dark relative overflow-hidden">

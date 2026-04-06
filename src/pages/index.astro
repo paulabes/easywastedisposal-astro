@@ -31,12 +31,15 @@ const homeFaqs = [
 
 const localBusinessSchema = {
   '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  'additionalType': 'https://schema.org/ProfessionalService',
+  '@type': 'ProfessionalService',
+  '@id': 'https://easywastedisposal.co.uk/#organization',
   'name': 'Easy Waste Disposal',
   'url': 'https://easywastedisposal.co.uk',
   'telephone': '+447342877759',
   'email': 'info@easywastedisposal.co.uk',
+  'logo': 'https://easywastedisposal.co.uk/images/easy-waste-disposal-logo-retina-new.png',
+  'image': 'https://easywastedisposal.co.uk/images/og-default.png',
+  'description': 'Licensed rubbish removal and waste disposal service covering North and Central London. Same-day collection, 98% recycling rate.',
   'address': {
     '@type': 'PostalAddress',
     'streetAddress': '52B Turnpike Lane',
@@ -45,18 +48,48 @@ const localBusinessSchema = {
     'postalCode': 'N8 0PS',
     'addressCountry': 'GB',
   },
-  'openingHoursSpecification': {
-    '@type': 'OpeningHoursSpecification',
-    'dayOfWeek': ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-    'opens': '07:00',
-    'closes': '20:00',
+  'geo': {
+    '@type': 'GeoCoordinates',
+    'latitude': 51.5907,
+    'longitude': -0.1098,
   },
-  'priceRange': '£40-£500',
+  'openingHoursSpecification': [
+    {
+      '@type': 'OpeningHoursSpecification',
+      'dayOfWeek': ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+      'opens': '07:00',
+      'closes': '20:00',
+    },
+  ],
+  'priceRange': '££',
+  'currenciesAccepted': 'GBP',
+  'paymentAccepted': 'Cash, Credit Card, Bank Transfer',
+  'areaServed': [
+    { '@type': 'City', 'name': 'London', 'sameAs': 'https://en.wikipedia.org/wiki/London' },
+    { '@type': 'AdministrativeArea', 'name': 'Haringey' },
+    { '@type': 'AdministrativeArea', 'name': 'Islington' },
+    { '@type': 'AdministrativeArea', 'name': 'Camden' },
+    { '@type': 'AdministrativeArea', 'name': 'Westminster' },
+    { '@type': 'AdministrativeArea', 'name': 'Hackney' },
+    { '@type': 'AdministrativeArea', 'name': 'Enfield' },
+  ],
   'aggregateRating': {
     '@type': 'AggregateRating',
     'ratingValue': '5.0',
     'reviewCount': '47',
+    'bestRating': '5',
   },
+  'sameAs': [
+    businessInfo.googleReviewsUrl,
+  ],
+};
+
+const webSiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  'name': 'Easy Waste Disposal',
+  'url': 'https://easywastedisposal.co.uk',
+  'publisher': { '@id': 'https://easywastedisposal.co.uk/#organization' },
 };
 
 const faqSchemaData = {
@@ -83,7 +116,7 @@ const reviews = [
   title="Same-Day Rubbish Removal & Waste Disposal London"
   description="Licensed rubbish removal and waste disposal across London. Same-day and next-day collection from £40. 98% recycling rate. Call 07342 877 759 for a free quote."
   canonical="/"
-  schema={[localBusinessSchema, faqSchemaData]}
+  schema={[localBusinessSchema, webSiteSchema, faqSchemaData]}
 >
   <div class="space-y-0">
     <!-- Hero Section -->

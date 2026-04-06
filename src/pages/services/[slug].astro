@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import ServiceIcon from '../../components/ServiceIcon.astro';
 import { QuoteForm } from '../../components/QuoteForm';
 import { servicesMeta, allServices, regions, businessInfo, type ServiceSlug } from '../../data/locations';
@@ -31,13 +32,58 @@ const reviews = [
   { name: 'Emma L.', location: 'Finsbury Park, N4', text: 'Used for a garden clearance - old shed, soil, and hedge cuttings. All gone in under an hour. Excellent.' },
   { name: 'Michael O.', location: 'Tottenham, N17', text: "Regular commercial collections for our restaurant. Always on time, always professional. Wouldn't use anyone else." },
 ];
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  'name': service.name,
+  'description': service.description,
+  'url': `https://easywastedisposal.co.uk/services/${service.slug}`,
+  'serviceType': service.name,
+  'provider': { '@id': 'https://easywastedisposal.co.uk/#organization' },
+  'areaServed': { '@type': 'City', 'name': 'London' },
+  'offers': {
+    '@type': 'Offer',
+    'priceCurrency': 'GBP',
+    'price': service.priceFrom.replace('£', ''),
+    'priceSpecification': {
+      '@type': 'PriceSpecification',
+      'priceCurrency': 'GBP',
+      'price': service.priceFrom.replace('£', ''),
+      'unitText': 'starting price',
+    },
+    'availability': 'https://schema.org/InStock',
+  },
+  'hasOfferCatalog': {
+    '@type': 'OfferCatalog',
+    'name': `${service.name} Features`,
+    'itemListElement': service.features.map(f => ({
+      '@type': 'Offer',
+      'itemOffered': { '@type': 'Service', 'name': f },
+    })),
+  },
+};
+
+const faqSchema = service.faqs && service.faqs.length > 0 ? {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': service.faqs.map(faq => ({
+    '@type': 'Question',
+    'name': faq.question,
+    'acceptedAnswer': { '@type': 'Answer', 'text': faq.answer },
+  })),
+} : null;
+
+const schemas = [serviceSchema, faqSchema].filter(Boolean);
 ---
 
 <Layout
   title={`${service.name} London | ${availability} Collection from ${service.priceFrom}`}
   description={service.description}
   canonical={`/services/${service.slug}`}
+  schema={schemas}
 >
+  <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Services', href: '/services' }, { label: service.name }]} />
   <div class="space-y-0">
     <!-- Hero -->
     <section class="bg-dark relative overflow-hidden">

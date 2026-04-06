@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 import { QuoteForm } from '../components/QuoteForm';
 import { GoogleReviewsReact } from '../components/GoogleReviewsReact';
 import { businessInfo } from '../data/locations';
@@ -12,6 +13,7 @@ import { heroImage } from '../data/images';
   canonical="/contact"
   hideFooterCTA={true}
 >
+  <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Contact' }]} />
   <div class="space-y-0">
     <!-- Hero Section -->
     <section class="bg-dark relative overflow-hidden">

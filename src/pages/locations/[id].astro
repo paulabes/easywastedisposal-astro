@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import ServiceIcon from '../../components/ServiceIcon.astro';
 import { QuoteForm } from '../../components/QuoteForm';
 import { areas, getArea, allServices, regions, businessInfo } from '../../data/locations';
@@ -25,6 +26,7 @@ const postcodes = area.postcodes.join(', ');
   canonical={`/locations/${id}`}
   hideFooterCTA={true}
 >
+  <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Locations', href: '/locations' }, { label: locationName }]} />
   <div class="space-y-0">
     <!-- Hero -->
     <section class="bg-dark relative overflow-hidden">

@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { regions, allServices, businessInfo } from '../../data/locations';
 ---
 
@@ -8,6 +9,7 @@ import { regions, allServices, businessInfo } from '../../data/locations';
   description="Same-day waste disposal across North and Central London. Covering Haringey, Islington, Camden, Westminster, Hackney, Enfield, and more. Licensed and insured."
   canonical="/locations"
 >
+  <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Locations' }]} />
   <div class="space-y-0">
     <!-- Hero -->
     <section class="bg-dark relative overflow-hidden">

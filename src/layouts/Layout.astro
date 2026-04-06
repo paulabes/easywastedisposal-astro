@@ -38,7 +38,7 @@ const serviceIcons: Record<string, string> = {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{fullTitle}</title>
     <meta name="description" content={truncatedDesc} />
-    <meta name="robots" content="noindex, nofollow" />
+    <meta name="robots" content="index, follow" />
     {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
 
     <meta property="og:title" content={fullTitle} />
@@ -46,10 +46,27 @@ const serviceIcons: Record<string, string> = {
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Easy Waste Disposal" />
     {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+    <meta property="og:image" content={`${BASE_URL}/images/og-default.png`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_GB" />
 
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={truncatedDesc} />
+    <meta name="twitter:image" content={`${BASE_URL}/images/og-default.png`} />
+
+    <meta name="geo.region" content="GB-LND" />
+    <meta name="geo.placename" content="London" />
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="/favicon-64x64.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#16a34a" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -137,6 +154,10 @@ const serviceIcons: Record<string, string> = {
                     <a href={businessInfo.phoneHref} class="text-sm text-gray-300 hover:text-green-400 transition-colors font-medium block">{businessInfo.phone}</a>
                     <span class="text-xs text-gray-500">{businessInfo.hours}</span>
                   </div>
+                </li>
+                <li class="flex items-start space-x-2.5">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-400 mt-0.5 flex-shrink-0"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+                  <a href={businessInfo.whatsapp} target="_blank" rel="noopener noreferrer" class="text-sm text-gray-300 hover:text-green-400 transition-colors">WhatsApp Us</a>
                 </li>
                 <li class="flex items-start space-x-2.5">
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-400 mt-0.5 flex-shrink-0"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
