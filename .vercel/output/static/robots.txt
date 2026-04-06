@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /404
-
-Sitemap: https://easywastedisposal.co.uk/sitemap-index.xml
