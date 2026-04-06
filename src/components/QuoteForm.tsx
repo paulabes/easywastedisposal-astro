@@ -65,7 +65,7 @@ export const QuoteForm: React.FC = () => {
 
   if (submitted) {
     return (
-      <div className="bg-white rounded-3xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] p-8 lg:p-10 text-center border border-gray-100">
+      <div className="bg-white rounded-3xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] p-8 lg:p-10 text-center border border-gray-100" role="status" aria-live="polite">
         <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
           <ArrowRight size={24} className="text-green-600" />
         </div>
@@ -122,16 +122,17 @@ export const QuoteForm: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-dark mb-2">Your postcode</label>
+            <label htmlFor="postcode" className="block text-sm font-semibold text-dark mb-2">Your postcode</label>
             <input
+              id="postcode"
               type="text"
               value={formData.postcode}
               onChange={e => updateField('postcode', e.target.value.toUpperCase())}
               placeholder="e.g. N8 0PS"
-              className={`w-full border-2 rounded-xl px-4 py-3 text-sm font-medium focus:ring-0 outline-none transition-colors ${postcodeError ? 'border-red-400 focus:border-red-500' : 'border-gray-300 focus:border-green-500'}`}
+              className={`w-full border-2 rounded-xl px-4 py-3 text-sm font-medium focus:ring-2 focus:ring-green-500 outline-none transition-colors ${postcodeError ? 'border-red-400 focus:border-red-500' : 'border-gray-300 focus:border-green-500'}`}
             />
             {postcodeError && (
-              <p className="text-xs text-red-500 mt-1.5">{postcodeError}</p>
+              <p className="text-xs text-red-500 mt-1.5" role="alert">{postcodeError}</p>
             )}
           </div>
 
@@ -164,13 +165,14 @@ export const QuoteForm: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-dark mb-2">Any details? (optional)</label>
+            <label htmlFor="details" className="block text-sm font-semibold text-dark mb-2">Any details? (optional)</label>
             <textarea
+              id="details"
               rows={3}
               value={formData.details}
               onChange={e => updateField('details', e.target.value)}
               placeholder="e.g. Two sofas and a fridge from the second floor..."
-              className="w-full border-2 border-gray-300 rounded-xl px-4 py-3 text-sm font-medium focus:border-green-500 focus:ring-0 outline-none transition-all duration-300 resize-none"
+              className="w-full border-2 border-gray-300 rounded-xl px-4 py-3 text-sm font-medium focus:border-green-500 focus:ring-2 focus:ring-green-500 outline-none transition-all duration-300 resize-none"
             />
           </div>
 
@@ -182,9 +184,10 @@ export const QuoteForm: React.FC = () => {
               <div className="flex flex-wrap gap-2 mb-3">
                 {images.map((img, i) => (
                   <div key={i} className="relative w-16 h-16 bg-gray-100 rounded-xl overflow-hidden shadow-sm">
-                    <img src={URL.createObjectURL(img)} alt="" className="w-full h-full object-cover" />
+                    <img src={URL.createObjectURL(img)} alt="Uploaded photo" className="w-full h-full object-cover" />
                     <button
                       onClick={() => removeImage(i)}
+                      aria-label="Remove image"
                       className="absolute top-0.5 right-0.5 w-5 h-5 bg-dark/70 rounded-full flex items-center justify-center"
                     >
                       <X size={10} className="text-white" />
@@ -217,19 +220,19 @@ export const QuoteForm: React.FC = () => {
       {formStep === 3 && (
         <div className="space-y-5">
           <div>
-            <label className="block text-sm font-semibold text-dark mb-2">Full name</label>
-            <input type="text" value={formData.name} onChange={e => updateField('name', e.target.value)} placeholder="John Smith"
-              className="w-full border-2 border-gray-300 rounded-xl px-4 py-3 text-sm font-medium focus:border-green-500 focus:ring-0 outline-none transition-all duration-300" />
+            <label htmlFor="name" className="block text-sm font-semibold text-dark mb-2">Full name</label>
+            <input id="name" type="text" required autoComplete="name" value={formData.name} onChange={e => updateField('name', e.target.value)} placeholder="John Smith"
+              className="w-full border-2 border-gray-300 rounded-xl px-4 py-3 text-sm font-medium focus:border-green-500 focus:ring-2 focus:ring-green-500 outline-none transition-all duration-300" />
           </div>
           <div>
-            <label className="block text-sm font-semibold text-dark mb-2">Email address</label>
-            <input type="email" value={formData.email} onChange={e => updateField('email', e.target.value)} placeholder="john@example.com"
-              className="w-full border-2 border-gray-300 rounded-xl px-4 py-3 text-sm font-medium focus:border-green-500 focus:ring-0 outline-none transition-all duration-300" />
+            <label htmlFor="email" className="block text-sm font-semibold text-dark mb-2">Email address</label>
+            <input id="email" type="email" required autoComplete="email" value={formData.email} onChange={e => updateField('email', e.target.value)} placeholder="john@example.com"
+              className="w-full border-2 border-gray-300 rounded-xl px-4 py-3 text-sm font-medium focus:border-green-500 focus:ring-2 focus:ring-green-500 outline-none transition-all duration-300" />
           </div>
           <div>
-            <label className="block text-sm font-semibold text-dark mb-2">Phone number</label>
-            <input type="tel" value={formData.phone} onChange={e => updateField('phone', e.target.value)} placeholder="07700 900000"
-              className="w-full border-2 border-gray-300 rounded-xl px-4 py-3 text-sm font-medium focus:border-green-500 focus:ring-0 outline-none transition-all duration-300" />
+            <label htmlFor="phone" className="block text-sm font-semibold text-dark mb-2">Phone number</label>
+            <input id="phone" type="tel" required autoComplete="tel" value={formData.phone} onChange={e => updateField('phone', e.target.value)} placeholder="07700 900000"
+              className="w-full border-2 border-gray-300 rounded-xl px-4 py-3 text-sm font-medium focus:border-green-500 focus:ring-2 focus:ring-green-500 outline-none transition-all duration-300" />
           </div>
 
           <div className="flex space-x-3">

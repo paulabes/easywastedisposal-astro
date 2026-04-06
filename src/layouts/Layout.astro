@@ -38,7 +38,7 @@ const serviceIcons: Record<string, string> = {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{fullTitle}</title>
     <meta name="description" content={truncatedDesc} />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="noindex, nofollow" />
     {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
 
     <meta property="og:title" content={fullTitle} />
@@ -77,10 +77,11 @@ const serviceIcons: Record<string, string> = {
     ))}
   </head>
   <body>
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:bg-green-600 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">Skip to content</a>
     <div class="min-h-screen bg-white font-sans flex flex-col">
       <Header client:idle />
 
-      <main class="flex-grow">
+      <main id="main-content" class="flex-grow">
         <slot />
       </main>
 
@@ -92,10 +93,8 @@ const serviceIcons: Record<string, string> = {
               <h2 class="text-2xl lg:text-4xl font-extrabold mb-4 tracking-tight">Ready to clear your space?</h2>
               <p class="text-green-100 text-lg mb-8 max-w-xl mx-auto">Same-day and next-day collection. Get a free, no-obligation quote.</p>
               <div class="flex flex-row justify-center gap-3">
-                <a href="/contact#quote">
-                  <button class="inline-flex items-center justify-center font-bold tracking-wide transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-2xl hover:-translate-y-0.5 active:translate-y-0 bg-white text-dark hover:bg-gray-50 hover:shadow-[0_8px_20px_rgba(0,0,0,0.1)] shadow-md focus:ring-gray-300 border border-gray-200 px-5 py-3 text-sm">
+                <a href="/contact#quote" class="inline-flex items-center justify-center font-bold tracking-wide transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-2xl hover:-translate-y-0.5 active:translate-y-0 bg-white text-dark hover:bg-gray-50 hover:shadow-[0_8px_20px_rgba(0,0,0,0.1)] shadow-md focus:ring-gray-300 border border-gray-200 px-5 py-3 text-sm">
                     Get Free Quote <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                  </button>
                 </a>
               </div>
             </div>
@@ -105,13 +104,13 @@ const serviceIcons: Record<string, string> = {
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12">
             <div>
-              <h4 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">Easy Waste Disposal</h4>
+              <h4 class="text-xs font-bold uppercase tracking-widest text-gray-300 mb-4">Easy Waste Disposal</h4>
               <p class="text-sm text-gray-400 leading-relaxed mb-4">Family-run, licensed waste removal covering North and Central London. Same-day collection, honest pricing, and a {businessInfo.recyclingRate} recycling rate. Trusted by hundreds of homes and businesses since 2021.</p>
               <p class="text-sm text-gray-400 leading-relaxed">Environment Agency Licence: {businessInfo.licenceNumber}</p>
             </div>
 
             <div>
-              <h4 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">Services</h4>
+              <h4 class="text-xs font-bold uppercase tracking-widest text-gray-300 mb-4">Services</h4>
               <ul class="space-y-2.5">
                 {allServices.map(s => (
                   <li>
@@ -125,10 +124,10 @@ const serviceIcons: Record<string, string> = {
             </div>
 
             <div>
-              <h4 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">Locations</h4>
+              <h4 class="text-xs font-bold uppercase tracking-widest text-gray-300 mb-4">Locations</h4>
               {regions.map(region => (
                 <div class="mb-4">
-                  <p class="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">{region.name}</p>
+                  <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">{region.name}</p>
                   <ul class="space-y-2">
                     {region.areas.map(area => (
                       <li>
@@ -144,13 +143,13 @@ const serviceIcons: Record<string, string> = {
             </div>
 
             <div>
-              <h4 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">Contact</h4>
+              <h4 class="text-xs font-bold uppercase tracking-widest text-gray-300 mb-4">Contact</h4>
               <ul class="space-y-3">
                 <li class="flex items-start space-x-2.5">
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-400 mt-0.5 flex-shrink-0"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                   <div>
                     <a href={businessInfo.phoneHref} class="text-sm text-gray-300 hover:text-green-400 transition-colors font-medium block">{businessInfo.phone}</a>
-                    <span class="text-xs text-gray-500">{businessInfo.hours}</span>
+                    <span class="text-xs text-gray-400">{businessInfo.hours}</span>
                   </div>
                 </li>
                 <li class="flex items-start space-x-2.5">
@@ -166,17 +165,17 @@ const serviceIcons: Record<string, string> = {
                   <div class="text-sm text-gray-300 leading-relaxed">London, N8 0PS</div>
                 </li>
               </ul>
-              <p class="text-xs text-gray-500 mt-6 leading-relaxed">Registered in England and Wales<br />Company reg. no. 13846151</p>
+              <p class="text-xs text-gray-400 mt-6 leading-relaxed">Registered in England and Wales<br />Company reg. no. 13846151</p>
             </div>
           </div>
         </div>
 
         <div class="border-t border-white/10">
           <div class="px-4 sm:px-6 lg:px-8 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p class="text-xs text-gray-500">&copy; {new Date().getFullYear()} Easy Waste Disposal Ltd. All rights reserved. Licence: {businessInfo.licenceNumber} | Website Design by <a href="https://crouchendmedia.co.uk" target="_blank" rel="noopener noreferrer" class="hover:text-green-400 transition-colors">Crouch End Media</a></p>
+            <p class="text-xs text-gray-400">&copy; {new Date().getFullYear()} Easy Waste Disposal Ltd. All rights reserved. Licence: {businessInfo.licenceNumber} | Website Design by <a href="https://crouchendmedia.co.uk" target="_blank" rel="noopener noreferrer" class="hover:text-green-400 transition-colors">Crouch End Media</a></p>
             <div class="flex items-center gap-4">
-              <a href="/privacy" class="text-xs text-gray-500 hover:text-green-400 transition-colors">Privacy Policy</a>
-              <a href="/terms" class="text-xs text-gray-500 hover:text-green-400 transition-colors">Terms of Service</a>
+              <a href="/privacy" class="text-xs text-gray-400 hover:text-green-400 transition-colors">Privacy Policy</a>
+              <a href="/terms" class="text-xs text-gray-400 hover:text-green-400 transition-colors">Terms of Service</a>
             </div>
           </div>
         </div>
@@ -185,22 +184,16 @@ const serviceIcons: Record<string, string> = {
       <!-- Mobile Bottom Bar -->
       <div class="fixed bottom-0 left-0 right-0 z-50 bg-dark border-t border-white/10 px-3 py-2 lg:hidden">
         <div class="flex gap-2">
-          <a href="/contact#quote" class="flex-1">
-            <button class="w-full inline-flex items-center justify-center font-bold tracking-wide transition-all duration-300 rounded-2xl bg-green-600 text-white hover:bg-green-500 shadow-md border border-green-500 px-4 py-2 text-xs">
-              Quote <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            </button>
+          <a href="/contact#quote" class="flex-1 w-full inline-flex items-center justify-center font-bold tracking-wide transition-all duration-300 rounded-2xl bg-green-600 text-white hover:bg-green-500 shadow-md border border-green-500 px-4 py-3 text-xs">
+            Quote <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </a>
-          <a href={businessInfo.phoneHref} class="flex-1">
-            <button class="w-full inline-flex items-center justify-center font-bold tracking-wide transition-all duration-300 rounded-2xl bg-white text-dark hover:bg-gray-50 shadow-md border border-gray-200 px-4 py-2 text-xs">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-              Call
-            </button>
+          <a href={businessInfo.phoneHref} class="flex-1 w-full inline-flex items-center justify-center font-bold tracking-wide transition-all duration-300 rounded-2xl bg-white text-dark hover:bg-gray-50 shadow-md border border-gray-200 px-4 py-3 text-xs">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Call
           </a>
-          <a href={businessInfo.whatsapp} target="_blank" rel="noopener noreferrer" class="flex-1">
-            <button class="w-full inline-flex items-center justify-center font-bold tracking-wide transition-all duration-300 rounded-2xl bg-[#25D366] text-white hover:bg-[#20BE5C] shadow-md px-4 py-2 text-xs">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
-              WhatsApp
-            </button>
+          <a href={businessInfo.whatsapp} target="_blank" rel="noopener noreferrer" class="flex-1 w-full inline-flex items-center justify-center font-bold tracking-wide transition-all duration-300 rounded-2xl bg-[#25D366] text-white hover:bg-[#20BE5C] shadow-md px-4 py-3 text-xs">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+            WhatsApp
           </a>
         </div>
       </div>

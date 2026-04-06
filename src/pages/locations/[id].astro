@@ -18,12 +18,34 @@ const content = getAreaContent(id!);
 const locationName = area.name;
 const postcodes = area.postcodes.join(', ');
 
+const locationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  'name': `Easy Waste Disposal - ${locationName}`,
+  'url': `https://easywastedisposal.co.uk/locations/${id}`,
+  'telephone': '+447342877759',
+  'address': {
+    '@type': 'PostalAddress',
+    'addressLocality': locationName,
+    'addressRegion': 'London',
+    'addressCountry': 'GB',
+  },
+  'parentOrganization': { '@id': 'https://easywastedisposal.co.uk/#organization' },
+  'areaServed': { '@type': 'AdministrativeArea', 'name': locationName },
+  'openingHoursSpecification': [{
+    '@type': 'OpeningHoursSpecification',
+    'dayOfWeek': ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+    'opens': '07:00',
+    'closes': '20:00',
+  }],
+};
 ---
 
 <Layout
   title={`Waste Disposal ${locationName} ${postcodes} | Same-Day Collection`}
   description={content?.heroDescription || `Same-day waste disposal in ${locationName} ${postcodes}. Rubbish removal, house clearance, garden waste, and more. Licensed and insured. Call ${businessInfo.phone}.`}
   canonical={`/locations/${id}`}
+  schema={locationSchema}
   hideFooterCTA={true}
 >
   <div class="space-y-0">
@@ -109,6 +131,9 @@ const postcodes = area.postcodes.join(', ');
               src={locationImages[id!]?.src || defaultLocationImage.src}
               alt={locationImages[id!]?.alt || `Waste disposal service in ${locationName}`}
               class="w-full h-auto object-cover aspect-[3/2] rounded-2xl"
+              width="1200"
+              height="800"
+              loading="lazy"
             />
           </div>
           <div>
@@ -199,17 +224,13 @@ const postcodes = area.postcodes.join(', ');
             <p class="text-base text-gray-300 font-medium">Call or WhatsApp us for free advice and a same-day quote.</p>
           </div>
           <div class="flex flex-row gap-3 shrink-0">
-            <a href={businessInfo.phoneHref}>
-              <button class="inline-flex items-center justify-center font-bold tracking-wide transition-all duration-300 rounded-2xl bg-white text-dark hover:bg-gray-50 shadow-md border border-gray-200 px-5 py-3 text-sm hover:-translate-y-0.5">
+            <a href={businessInfo.phoneHref} class="inline-flex items-center justify-center font-bold tracking-wide transition-all duration-300 rounded-2xl bg-white text-dark hover:bg-gray-50 shadow-md border border-gray-200 px-5 py-3 text-sm hover:-translate-y-0.5">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                 {businessInfo.phone}
-              </button>
             </a>
-            <a href={businessInfo.whatsapp} target="_blank" rel="noopener noreferrer">
-              <button class="inline-flex items-center justify-center font-bold tracking-wide transition-all duration-300 rounded-2xl bg-[#25D366] text-white hover:bg-[#20BE5C] shadow-md px-5 py-3 text-sm hover:-translate-y-0.5">
+            <a href={businessInfo.whatsapp} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center font-bold tracking-wide transition-all duration-300 rounded-2xl bg-[#25D366] text-white hover:bg-[#20BE5C] shadow-md px-5 py-3 text-sm hover:-translate-y-0.5">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
                 WhatsApp
-              </button>
             </a>
           </div>
         </div>
@@ -221,10 +242,8 @@ const postcodes = area.postcodes.join(', ');
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 class="text-2xl lg:text-4xl font-extrabold mb-4 tracking-tight text-white">Ready to clear your space?</h2>
         <p class="text-green-100 text-lg mb-8 max-w-xl mx-auto">Same-day and next-day collection. Get a free, no-obligation quote.</p>
-        <a href="/contact#quote">
-          <button class="inline-flex items-center justify-center font-bold tracking-wide transition-all duration-300 rounded-2xl hover:-translate-y-0.5 bg-white text-dark hover:bg-gray-50 shadow-md border border-gray-200 px-5 py-3 text-sm">
+        <a href="/contact#quote" class="inline-flex items-center justify-center font-bold tracking-wide transition-all duration-300 rounded-2xl hover:-translate-y-0.5 bg-white text-dark hover:bg-gray-50 shadow-md border border-gray-200 px-5 py-3 text-sm">
             Get Free Quote <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </button>
         </a>
       </div>
     </section>

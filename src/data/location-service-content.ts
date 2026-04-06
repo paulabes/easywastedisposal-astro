@@ -1,5 +1,5 @@
-import { ServiceMeta, ServiceSlug } from './locations.ts';
-import { AreaContent } from './area-content.ts';
+import type { ServiceMeta, ServiceSlug } from './locations.ts';
+import type { AreaContent } from './area-content.ts';
 
 export interface LocationServiceContent {
   heroDescription: string;
