@@ -119,10 +119,23 @@ const serviceIcons: Record<string, string> = {
             </div>
 
             <div>
-              <h4 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">Locations</h4>
-              {regions.map(region => (
-                <div class="mb-4">
-                  <p class="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">{region.name}</p>
+              <h4 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">Haringey</h4>
+              <ul class="space-y-2">
+                {regions.filter(r => r.slug === 'haringey').flatMap(r => r.areas).map(area => (
+                  <li>
+                    <a href={`/locations/${area.slug}`} class="flex items-center space-x-2 text-sm text-gray-300 hover:text-green-400 transition-colors">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-400 flex-shrink-0"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                      <span>{area.name}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              {regions.filter(r => r.slug !== 'haringey').map(region => (
+                <div class="mb-6">
+                  <h4 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">{region.name}</h4>
                   <ul class="space-y-2">
                     {region.areas.map(area => (
                       <li>
@@ -135,14 +148,6 @@ const serviceIcons: Record<string, string> = {
                   </ul>
                 </div>
               ))}
-            </div>
-
-            <div>
-              <h4 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">Company</h4>
-              <ul class="space-y-2.5">
-                <li><a href="/about" class="text-sm text-gray-300 hover:text-green-400 transition-colors">About Us</a></li>
-                <li><a href="/contact" class="text-sm text-gray-300 hover:text-green-400 transition-colors">Contact</a></li>
-              </ul>
             </div>
 
             <div>
