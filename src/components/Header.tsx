@@ -71,13 +71,13 @@ export const Header: React.FC = () => {
           <div className="flex items-center justify-between h-16 relative">
             <div className="flex-shrink-0">
               <a href="/" className="group">
-                <img src="/images/easy-waste-disposal-logo-retina-new.png" alt="Easy Waste Disposal" className="h-12" />
+                <img src="/images/easy-waste-disposal-logo-retina-new.png" alt="Easy Waste Disposal" className="h-12" width={111} height={48} />
               </a>
             </div>
 
             <nav className="hidden lg:flex items-center space-x-0.5 xl:space-x-1 ml-6">
-              <a href="/" className="px-3 xl:px-4 py-2 rounded-xl text-sm font-bold text-gray-700 hover:text-dark hover:bg-gray-50 transition-all">Home</a>
-              <a href="/about" className="px-3 xl:px-4 py-2 rounded-xl text-sm font-bold text-gray-700 hover:text-dark hover:bg-gray-50 transition-all">About</a>
+              <a href="/" onClick={() => setActiveMega(null)} className="px-3 xl:px-4 py-2 rounded-xl text-sm font-bold text-gray-700 hover:text-dark hover:bg-gray-50 transition-all">Home</a>
+              <a href="/about" onClick={() => setActiveMega(null)} className="px-3 xl:px-4 py-2 rounded-xl text-sm font-bold text-gray-700 hover:text-dark hover:bg-gray-50 transition-all">About</a>
 
               {/* Services Mega */}
               <div className="relative">
@@ -163,7 +163,7 @@ export const Header: React.FC = () => {
                 )}
               </div>
 
-              <a href="/contact" className="px-3 xl:px-4 py-2 rounded-xl text-sm font-bold text-gray-700 hover:text-dark hover:bg-gray-50 transition-all">Contact</a>
+              <a href="/contact" onClick={() => setActiveMega(null)} className="px-3 xl:px-4 py-2 rounded-xl text-sm font-bold text-gray-700 hover:text-dark hover:bg-gray-50 transition-all">Contact</a>
             </nav>
 
             <div className="hidden lg:flex items-center justify-end space-x-2 xl:space-x-3 flex-shrink-0">
