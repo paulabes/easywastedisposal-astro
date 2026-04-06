@@ -105,6 +105,12 @@ const serviceIcons: Record<string, string> = {
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12">
             <div>
+              <h4 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">Easy Waste Disposal</h4>
+              <p class="text-sm text-gray-400 leading-relaxed mb-4">Family-run, licensed waste removal covering North and Central London. Same-day collection, honest pricing, and a {businessInfo.recyclingRate} recycling rate. Trusted by hundreds of homes and businesses since 2021.</p>
+              <p class="text-sm text-gray-400 leading-relaxed">Environment Agency Licence: {businessInfo.licenceNumber}</p>
+            </div>
+
+            <div>
               <h4 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">Services</h4>
               <ul class="space-y-2.5">
                 {allServices.map(s => (
@@ -119,23 +125,10 @@ const serviceIcons: Record<string, string> = {
             </div>
 
             <div>
-              <h4 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">Haringey</h4>
-              <ul class="space-y-2">
-                {regions.filter(r => r.slug === 'haringey').flatMap(r => r.areas).map(area => (
-                  <li>
-                    <a href={`/locations/${area.slug}`} class="flex items-center space-x-2 text-sm text-gray-300 hover:text-green-400 transition-colors">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-400 flex-shrink-0"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-                      <span>{area.name}</span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              {regions.filter(r => r.slug !== 'haringey').map(region => (
-                <div class="mb-6">
-                  <h4 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">{region.name}</h4>
+              <h4 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">Locations</h4>
+              {regions.map(region => (
+                <div class="mb-4">
+                  <p class="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">{region.name}</p>
                   <ul class="space-y-2">
                     {region.areas.map(area => (
                       <li>
