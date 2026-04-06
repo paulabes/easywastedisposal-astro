@@ -15,7 +15,7 @@ export const areaContent: Record<string, AreaContent> = {
       'We regularly collect from streets around Bounds Green Road, Brownlow Road, and the roads between Bounds Green tube station and New Southgate. Our team knows the area well and can navigate the narrow residential streets easily.',
       'If you\'re doing up a property near Bounds Green or Arnos Grove, our builders waste service is ideal - we remove rubble, timber, old kitchens and bathrooms without you needing to hire a skip or apply for a council permit.',
     ],
-    localInfo: 'Haringey Council provides limited bulky waste collection, typically with a waiting time of several weeks. We offer same-day and next-day collection in Bounds Green N11, and our prices start from just £40 for single items.',
+    localInfo: 'Haringey Council provides limited bulky waste collection, typically with a waiting time of several weeks. We offer same-day and next-day collection in Bounds Green N11, and our prices start from just £25 for single items.',
     whyLocal: [
       'Based just minutes away in Haringey - fast response times',
       'We know the residential streets and parking restrictions in N11',
