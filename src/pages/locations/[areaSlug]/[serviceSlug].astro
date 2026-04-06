@@ -281,6 +281,24 @@ const otherServices = allServices.filter(s => s.slug !== service.slug);
       </section>
     )}
 
+    <!-- CTA Section -->
+    <section class={`py-20 ${isSkipHire || isCompliance ? 'bg-gray-100' : 'bg-white'}`}>
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-2xl lg:text-4xl font-extrabold text-dark mb-4 tracking-tight">Ready to book your {service.name.toLowerCase()}?</h2>
+        <p class="text-lg text-gray-500 max-w-2xl mx-auto mb-10">Get a free, no-obligation quote for {availability.toLowerCase()} collection in {area.name}. Call us or fill out our quick form.</p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href={businessInfo.phoneHref} class="inline-flex items-center gap-2 bg-green-600 text-white font-bold px-8 py-4 rounded-full text-lg hover:bg-green-700 transition-colors shadow-lg hover:shadow-xl">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            {businessInfo.phone}
+          </a>
+          <a href="#quote" class="inline-flex items-center gap-2 bg-dark text-white font-bold px-8 py-4 rounded-full text-lg hover:bg-gray-800 transition-colors shadow-lg hover:shadow-xl">
+            Get a free quote
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
     <!-- Other Services in This Area -->
     <section class="py-20 bg-gray-100">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
