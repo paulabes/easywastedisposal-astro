@@ -71,7 +71,7 @@ export const Header: React.FC = () => {
           <div className="flex items-center justify-between h-16 relative">
             <div className="flex-shrink-0">
               <a href="/" className="group">
-                <img src="/images/easy-waste-disposal-logo-retina-new.png" alt="Easy Waste Disposal" className="h-10" />
+                <img src="/images/easy-waste-disposal-logo-retina-new.png" alt="Easy Waste Disposal" className="h-12" />
               </a>
             </div>
 
