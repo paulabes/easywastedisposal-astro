@@ -254,12 +254,17 @@ export const Header: React.FC = () => {
                   </button>
                   {mobileExpanded === 'locations' && (
                     <div className="-mx-6 pt-2 pb-6">
-                      <div className="bg-gray-100 divide-y divide-white py-4">
-                        {regions.flatMap(r => r.areas).map(area => (
-                          <a key={area.slug} href={`/locations/${area.slug}`} className="flex items-center space-x-2 px-10 py-3 hover:bg-gray-200 transition-colors">
-                            <MapPin size={14} className="text-green-600 flex-shrink-0" />
-                            <span className="text-sm font-medium text-gray-600">{area.name}</span>
-                          </a>
+                      <div className="bg-gray-100 py-4">
+                        {regions.map(region => (
+                          <div key={region.slug}>
+                            <p className="px-10 pt-4 pb-2 text-[10px] font-bold uppercase tracking-widest text-gray-400">{region.name}</p>
+                            {region.areas.map(area => (
+                              <a key={area.slug} href={`/locations/${area.slug}`} className="flex items-center space-x-2 px-10 py-3 hover:bg-gray-200 transition-colors border-t border-white">
+                                <MapPin size={14} className="text-green-600 flex-shrink-0" />
+                                <span className="text-sm font-medium text-gray-600">{area.name}</span>
+                              </a>
+                            ))}
+                          </div>
                         ))}
                         <a href="/locations" className="flex items-center space-x-2 px-10 py-3 hover:bg-gray-200 transition-colors text-sm font-semibold text-green-600">
                           <ArrowRight size={16} className="flex-shrink-0" />
