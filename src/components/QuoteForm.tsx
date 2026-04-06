@@ -31,6 +31,8 @@ export const QuoteForm: React.FC = () => {
   const [postcodeError, setPostcodeError] = useState('');
   const [images, setImages] = useState<File[]>([]);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   const updateField = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -57,8 +59,33 @@ export const QuoteForm: React.FC = () => {
     setImages(prev => prev.filter((_, i) => i !== index));
   };
 
-  const handleSubmit = () => {
-    setSubmitted(true);
+  const handleSubmit = async () => {
+    setSubmitting(true);
+    setSubmitError('');
+
+    try {
+      const body = new FormData();
+      body.append('service', formData.service);
+      body.append('postcode', formData.postcode);
+      body.append('timeframe', formData.timeframe);
+      body.append('name', formData.name);
+      body.append('email', formData.email);
+      body.append('phone', formData.phone);
+      body.append('details', formData.details);
+      images.forEach(img => body.append('images', img));
+
+      const res = await fetch('/api/quote', { method: 'POST', body });
+
+      if (!res.ok) {
+        throw new Error('Failed to send');
+      }
+
+      setSubmitted(true);
+    } catch {
+      setSubmitError('Something went wrong. Please call us instead.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const timeframes = ['Within 24 hours', 'This week', 'Next week', 'Flexible / No rush'];
@@ -70,10 +97,7 @@ export const QuoteForm: React.FC = () => {
           <ArrowRight size={24} className="text-green-600" />
         </div>
         <h2 className="text-xl font-bold text-dark mb-2">Quote Request Sent!</h2>
-        <p className="text-sm text-gray-500 mb-6">We'll get back to you shortly.</p>
-        <a href={businessInfo.phoneHref}>
-          <Button size="lg">Call Us Now: {businessInfo.phone}</Button>
-        </a>
+        <p className="text-sm text-gray-500">We'll get back to you shortly.</p>
       </div>
     );
   }
@@ -239,10 +263,14 @@ export const QuoteForm: React.FC = () => {
             <Button variant="dark" size="lg" onClick={() => setFormStep(2)} className="flex-shrink-0">
               <ArrowLeft size={16} />
             </Button>
-            <Button size="lg" className="flex-1" onClick={handleSubmit}>
-              Get My Free Quote <ArrowRight size={16} className="ml-2" />
+            <Button size="lg" className="flex-1" onClick={handleSubmit} disabled={submitting}>
+              {submitting ? 'Sending...' : 'Get My Free Quote'} {!submitting && <ArrowRight size={16} className="ml-2" />}
             </Button>
           </div>
+
+          {submitError && (
+            <p className="text-xs text-red-500 text-center" role="alert">{submitError}</p>
+          )}
 
           <p className="text-xs text-gray-400 text-center">
             By submitting, you agree to our <a href="/privacy" className="underline">Privacy Policy</a>. We respond shortly.

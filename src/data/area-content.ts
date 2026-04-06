@@ -232,6 +232,22 @@ export const areaContent: Record<string, AreaContent> = {
     ],
     nearbyNote: 'We also cover Edmonton, Southgate, Palmers Green, Winchmore Hill, and Crews Hill.',
   },
+  'haringey': {
+    heroDescription: 'Professional waste disposal across the London Borough of Haringey. Covering Tottenham, Wood Green, Muswell Hill, Crouch End, Hornsey, Finsbury Park, and all surrounding areas. Same-day collection available.',
+    mainContent: [
+      'The London Borough of Haringey stretches from the leafy streets of Highgate and Muswell Hill in the west to the bustling urban centres of Tottenham and Wood Green in the east. As a local company based in Haringey, we know the borough inside out — from the Victorian terraces of Crouch End to the new developments around Tottenham Hale.',
+      'We handle waste from every type of property across the borough: period homes requiring careful furniture removal down narrow hallways, flats above shops on Green Lanes, new-build apartments in Tottenham Hale, and commercial premises along High Road. Our team navigates Haringey\'s mix of controlled parking zones, narrow residential streets, and busy high roads daily.',
+      'Haringey Council\'s bulky waste service has limited availability and can take weeks to collect. Our same-day service means you don\'t have to wait — and we collect from inside your property, not just the kerbside. We\'re fully licensed by the Environment Agency and provide waste transfer notes for every collection.',
+    ],
+    localInfo: 'Based in Haringey, we typically arrive within 1-2 hours for same-day bookings across the borough. We know every street, every parking restriction, and every access challenge.',
+    whyLocal: [
+      'Based in Haringey — your genuine local waste company',
+      'Same-day collection across all Haringey postcodes',
+      'Faster and cheaper than Haringey Council bulky waste',
+      'Expert at navigating the borough\'s varied property types',
+    ],
+    nearbyNote: 'We also serve all neighbouring boroughs including Enfield, Barnet, Camden, Islington, and Hackney.',
+  },
   'hackney': {
     heroDescription: 'Reliable waste disposal across Hackney - E5, E8, and E9 postcodes. From Dalston to Homerton, we collect household waste, bulky items, and commercial rubbish with same-day availability.',
     mainContent: [

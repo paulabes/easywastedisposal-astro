@@ -355,6 +355,7 @@ export const areas: Area[] = [
   { slug: 'islington', name: 'Islington', region: 'central-london', postcodes: ['EC1', 'N1'], description: 'Serving Islington and Angel including EC1 and N1.', services: allServicesList },
 
   // North London
+  { slug: 'haringey', name: 'Haringey', region: 'north-london', postcodes: ['N4', 'N6', 'N8', 'N10', 'N11', 'N15', 'N17', 'N22'], description: 'Covering the London Borough of Haringey including Tottenham, Wood Green, Muswell Hill, Crouch End, Hornsey, and Finsbury Park.', services: allServicesList },
   { slug: 'enfield', name: 'Enfield', region: 'north-london', postcodes: ['EN1', 'EN2', 'EN3'], description: 'Covering the London Borough of Enfield.', services: allServicesList },
   { slug: 'hackney', name: 'Hackney', region: 'north-london', postcodes: ['E5', 'E8', 'E9'], description: 'Serving the London Borough of Hackney.', services: allServicesList },
 ];
