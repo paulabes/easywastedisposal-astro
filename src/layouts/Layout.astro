@@ -14,7 +14,7 @@ interface Props {
 
 const { title, description, canonical, schema, hideFooterCTA = false } = Astro.props;
 
-const BASE_URL = 'https://easywastedisposal.co.uk';
+const BASE_URL = 'https://easywastedisposal.com';
 const fullTitle = `${title} | Easy Waste Disposal`;
 const canonicalUrl = canonical ? `${BASE_URL}${canonical}` : undefined;
 const truncatedDesc = description.length > 160 ? description.slice(0, 157) + '...' : description;

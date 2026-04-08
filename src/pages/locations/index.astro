@@ -7,14 +7,14 @@ const locationsSchema = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
   'name': 'Waste Disposal Service Areas',
-  'url': 'https://easywastedisposal.co.uk/locations',
+  'url': 'https://easywastedisposal.com/locations',
   'itemListElement': regions.flatMap(r => r.areas).map((area, i) => ({
     '@type': 'ListItem',
     'position': i + 1,
     'item': {
       '@type': 'Place',
       'name': area.name,
-      'url': `https://easywastedisposal.co.uk/locations/${area.slug}`,
+      'url': `https://easywastedisposal.com/locations/${area.slug}`,
       'address': { '@type': 'PostalAddress', 'addressLocality': area.name, 'addressRegion': 'London', 'addressCountry': 'GB' },
     },
   })),

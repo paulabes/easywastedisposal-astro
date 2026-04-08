@@ -421,7 +421,7 @@ export const businessInfo = {
   name: 'Easy Waste Disposal',
   phone: '07342 877 759',
   phoneHref: 'tel:+447342877759',
-  email: 'info@easywastedisposal.co.uk',
+  email: 'info@easywastedisposal.com',
   whatsapp: 'https://wa.me/447342877759',
   address: '52B Turnpike Lane, London, N8 0PS',
   hours: 'Monday - Sunday, 7am - 8pm',
