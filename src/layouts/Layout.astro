@@ -14,7 +14,7 @@ interface Props {
 
 const { title, description, canonical, schema, hideFooterCTA = false } = Astro.props;
 
-const BASE_URL = 'https://easywastedisposal.com';
+const BASE_URL = 'https://www.easywastedisposal.com';
 const fullTitle = `${title} | Easy Waste Disposal`;
 const canonicalUrl = canonical ? `${BASE_URL}${canonical}` : undefined;
 const truncatedDesc = description.length > 160 ? description.slice(0, 157) + '...' : description;
@@ -39,6 +39,7 @@ const serviceIcons: Record<string, string> = {
     <title>{fullTitle}</title>
     <meta name="description" content={truncatedDesc} />
     <meta name="robots" content="index, follow" />
+    <meta name="google-site-verification" content="4ExLrZOJU9EO2p1BlrF-2wPy9hVMUUC3w9B9uiVUZr8" />
     {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
 
     <meta property="og:title" content={fullTitle} />
