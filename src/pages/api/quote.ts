@@ -24,11 +24,12 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
-    // Collect image filenames for the email
-    const imageNames: string[] = [];
+    // Collect images as attachments
+    const attachments: { filename: string; content: Buffer }[] = [];
     for (const [key, value] of formData.entries()) {
       if (key === 'images' && value instanceof File && value.size > 0) {
-        imageNames.push(value.name);
+        const buffer = Buffer.from(await value.arrayBuffer());
+        attachments.push({ filename: value.name, content: buffer });
       }
     }
 
@@ -38,6 +39,7 @@ export const POST: APIRoute = async ({ request }) => {
       from: 'Easy Waste Disposal <quotes@easywastedisposal.com>',
       to: [toEmail],
       subject: `New Quote Request: ${service} - ${postcode}`,
+      attachments,
       html: `
         <h2>New Quote Request</h2>
         <table style="border-collapse: collapse; width: 100%; max-width: 600px;">
@@ -48,7 +50,7 @@ export const POST: APIRoute = async ({ request }) => {
           <tr><td style="padding: 8px; font-weight: bold; border-bottom: 1px solid #eee;">Email</td><td style="padding: 8px; border-bottom: 1px solid #eee;"><a href="mailto:${email}">${email}</a></td></tr>
           <tr><td style="padding: 8px; font-weight: bold; border-bottom: 1px solid #eee;">Phone</td><td style="padding: 8px; border-bottom: 1px solid #eee;"><a href="tel:${phone}">${phone}</a></td></tr>
           <tr><td style="padding: 8px; font-weight: bold; border-bottom: 1px solid #eee;">Details</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${details || 'None provided'}</td></tr>
-          ${imageNames.length > 0 ? `<tr><td style="padding: 8px; font-weight: bold; border-bottom: 1px solid #eee;">Photos</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${imageNames.length} photo(s) uploaded (${imageNames.join(', ')})</td></tr>` : ''}
+          ${attachments.length > 0 ? `<tr><td style="padding: 8px; font-weight: bold; border-bottom: 1px solid #eee;">Photos</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${attachments.length} photo(s) attached</td></tr>` : ''}
         </table>
       `,
     });
