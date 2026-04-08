@@ -33,7 +33,7 @@ export const POST: APIRoute = async ({ request }) => {
       }
     }
 
-    const toEmail = import.meta.env.RESEND_TO_EMAIL || 'florian@easywastedisposal.com';
+    const toEmail = 'florian@easywastedisposal.com';
 
     const { error } = await resend.emails.send({
       from: 'Easy Waste Disposal <quotes@easywastedisposal.com>',
