@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 import vercel from '@astrojs/vercel';
 
 export default defineConfig({
-  site: 'https://www.easywastedisposal.com',
+  site: 'https://easywastedisposal.com',
   trailingSlash: 'never',
   output: 'static',
   adapter: vercel(),
@@ -15,7 +15,7 @@ export default defineConfig({
       filter: (page) => !page.includes('/404'),
       serialize(item) {
         // Homepage
-        if (item.url === 'https://www.easywastedisposal.com/') {
+        if (item.url === 'https://easywastedisposal.com/') {
           item.priority = 1.0;
           item.changefreq = 'weekly';
         }
