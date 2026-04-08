@@ -255,7 +255,7 @@ export const QuoteForm: React.FC = () => {
           </div>
           <div>
             <label htmlFor="phone" className="block text-sm font-semibold text-dark mb-2">Phone number</label>
-            <input id="phone" type="tel" required autoComplete="tel" value={formData.phone} onChange={e => updateField('phone', e.target.value)} placeholder="07700 900000"
+            <input id="phone" type="tel" required autoComplete="tel" value={formData.phone} onChange={e => updateField('phone', e.target.value)} placeholder="07XXX XXX XXX"
               className="w-full border-2 border-gray-300 rounded-xl px-4 py-3 text-sm font-medium focus:border-green-500 focus:ring-2 focus:ring-green-500 outline-none transition-all duration-300" />
           </div>
 
