@@ -48,10 +48,23 @@ export const QuoteForm: React.FC = () => {
     setFormStep(2);
   };
 
+  const [imageError, setImageError] = useState('');
+
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      const newFiles = Array.from(e.target.files).slice(0, 5 - images.length);
-      setImages(prev => [...prev, ...newFiles]);
+      setImageError('');
+      const newFiles = Array.from(e.target.files);
+      const maxSize = 10 * 1024 * 1024; // 10MB per file
+      const tooLarge = newFiles.filter(f => f.size > maxSize);
+      if (tooLarge.length > 0) {
+        setImageError('Some photos are over 10MB and were not added.');
+        return;
+      }
+      const remaining = 5 - images.length;
+      if (newFiles.length > remaining) {
+        setImageError(`You can only upload ${remaining} more photo${remaining === 1 ? '' : 's'}.`);
+      }
+      setImages(prev => [...prev, ...newFiles.slice(0, remaining)]);
     }
   };
 
@@ -203,7 +216,8 @@ export const QuoteForm: React.FC = () => {
           {/* Image Upload */}
           <div>
             <label className="block text-sm font-semibold text-dark mb-2">Upload photos (optional)</label>
-            <p className="text-xs text-gray-400 mb-2">Send up to 5 photos for a more accurate quote.</p>
+            <p className="text-xs text-gray-400 mb-2">Send up to 5 photos (max 10MB each) for a more accurate quote.</p>
+            {imageError && <p className="text-xs text-red-500 mb-2">{imageError}</p>}
             {images.length > 0 && (
               <div className="flex flex-wrap gap-2 mb-3">
                 {images.map((img, i) => (
