@@ -422,7 +422,7 @@ export const businessInfo = {
   phone: '07342 877 759',
   phoneHref: 'tel:+447342877759',
   email: 'info@easywastedisposal.com',
-  whatsapp: 'https://wa.me/447342877759',
+  whatsapp: 'https://wa.me/447342877759?text=Hi%2C%20I%27d%20like%20a%20quote%20for%20waste%20collection%20please',
   address: '52B Turnpike Lane, London, N8 0PS',
   hours: 'Monday - Sunday, 7am - 8pm',
   licenceNumber: 'CBDU429337',
