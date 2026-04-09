@@ -193,7 +193,7 @@ export const Header: React.FC = () => {
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 aria-label="Toggle navigation menu"
                 aria-expanded={isMobileMenuOpen}
-                className="p-2 rounded-xl text-gray-600 hover:bg-gray-100 transition-colors"
+                className="p-2 rounded-xl text-gray-600 hover:bg-gray-100 active:bg-gray-200 transition-all"
               >
                 {isMobileMenuOpen ? <X size={26} strokeWidth={2.5} /> : <Menu size={26} strokeWidth={2.5} />}
               </button>
@@ -206,11 +206,11 @@ export const Header: React.FC = () => {
           <div className="lg:hidden fixed inset-0 top-[60px] z-40 bg-white overflow-y-auto overflow-x-hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             <div className="px-6 py-8">
               <nav className="space-y-1 mb-8">
-                <a href="/" className="flex items-center justify-between px-4 py-3 text-lg font-bold text-dark hover:bg-gray-50 rounded-2xl transition-colors">
+                <a href="/" className="flex items-center justify-between px-4 py-3 text-lg font-bold text-dark hover:bg-gray-50 active:bg-gray-100 rounded-2xl transition-all">
                   <span>Home</span>
                   <ArrowRight size={18} className="text-gray-400" />
                 </a>
-                <a href="/about" className="flex items-center justify-between px-4 py-3 text-lg font-bold text-dark hover:bg-gray-50 rounded-2xl transition-colors">
+                <a href="/about" className="flex items-center justify-between px-4 py-3 text-lg font-bold text-dark hover:bg-gray-50 active:bg-gray-100 rounded-2xl transition-all">
                   <span>About</span>
                   <ArrowRight size={18} className="text-gray-400" />
                 </a>
@@ -218,7 +218,7 @@ export const Header: React.FC = () => {
                 <div>
                   <button
                     onClick={() => setMobileExpanded(mobileExpanded === 'services' ? null : 'services')}
-                    className="flex items-center justify-between w-full px-4 py-3 text-lg font-bold text-dark hover:bg-gray-50 rounded-2xl transition-colors"
+                    className="flex items-center justify-between w-full px-4 py-3 text-lg font-bold text-dark hover:bg-gray-50 active:bg-gray-100 rounded-2xl transition-all"
                   >
                     <span>Services</span>
                     <ChevronDown size={20} className={`fill-current text-gray-400 transition-transform duration-200 ${mobileExpanded === 'services' ? 'rotate-180' : ''}`} />
@@ -229,13 +229,13 @@ export const Header: React.FC = () => {
                         {allServices.map(s => {
                           const SIcon = serviceIcons[s.slug];
                           return (
-                            <a key={s.slug} href={`/services/${s.slug}`} className="flex items-center space-x-2 px-10 py-3 hover:bg-gray-200 transition-colors">
+                            <a key={s.slug} href={`/services/${s.slug}`} className="flex items-center space-x-2 px-10 py-3 hover:bg-gray-200 active:bg-gray-300 transition-colors">
                               <SIcon size={16} className="text-green-600 flex-shrink-0" />
                               <span className="text-sm font-medium text-gray-600">{s.shortName}</span>
                             </a>
                           );
                         })}
-                        <a href="/services" className="flex items-center space-x-2 px-10 py-3 hover:bg-gray-200 transition-colors text-sm font-semibold text-green-600">
+                        <a href="/services" className="flex items-center space-x-2 px-10 py-3 hover:bg-gray-200 active:bg-gray-300 transition-colors text-sm font-semibold text-green-600">
                           <ArrowRight size={16} className="flex-shrink-0" />
                           <span>View all services</span>
                         </a>
@@ -247,7 +247,7 @@ export const Header: React.FC = () => {
                 <div>
                   <button
                     onClick={() => setMobileExpanded(mobileExpanded === 'locations' ? null : 'locations')}
-                    className="flex items-center justify-between w-full px-4 py-3 text-lg font-bold text-dark hover:bg-gray-50 rounded-2xl transition-colors"
+                    className="flex items-center justify-between w-full px-4 py-3 text-lg font-bold text-dark hover:bg-gray-50 active:bg-gray-100 rounded-2xl transition-all"
                   >
                     <span>Locations</span>
                     <ChevronDown size={20} className={`fill-current text-gray-400 transition-transform duration-200 ${mobileExpanded === 'locations' ? 'rotate-180' : ''}`} />
@@ -259,14 +259,14 @@ export const Header: React.FC = () => {
                           <div key={region.slug}>
                             <p className="px-10 pt-4 pb-2 text-[10px] font-bold uppercase tracking-widest text-gray-400">{region.name}</p>
                             {region.areas.map(area => (
-                              <a key={area.slug} href={`/locations/${area.slug}`} className="flex items-center space-x-2 px-10 py-3 hover:bg-gray-200 transition-colors border-t border-white">
+                              <a key={area.slug} href={`/locations/${area.slug}`} className="flex items-center space-x-2 px-10 py-3 hover:bg-gray-200 active:bg-gray-300 transition-colors border-t border-white">
                                 <MapPin size={14} className="text-green-600 flex-shrink-0" />
                                 <span className="text-sm font-medium text-gray-600">{area.name}</span>
                               </a>
                             ))}
                           </div>
                         ))}
-                        <a href="/locations" className="flex items-center space-x-2 px-10 py-3 hover:bg-gray-200 transition-colors text-sm font-semibold text-green-600">
+                        <a href="/locations" className="flex items-center space-x-2 px-10 py-3 hover:bg-gray-200 active:bg-gray-300 transition-colors text-sm font-semibold text-green-600">
                           <ArrowRight size={16} className="flex-shrink-0" />
                           <span>View all locations</span>
                         </a>
@@ -275,7 +275,7 @@ export const Header: React.FC = () => {
                   )}
                 </div>
 
-                <a href="/contact" className="flex items-center justify-between px-4 py-3 text-lg font-bold text-dark hover:bg-gray-50 rounded-2xl transition-colors">
+                <a href="/contact" className="flex items-center justify-between px-4 py-3 text-lg font-bold text-dark hover:bg-gray-50 active:bg-gray-100 rounded-2xl transition-all">
                   <span>Contact</span>
                   <ArrowRight size={18} className="text-gray-400" />
                 </a>

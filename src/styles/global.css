@@ -67,5 +67,10 @@ body {
 ::-webkit-scrollbar-thumb { background: #166534; border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background: #14532D; }
 
+/* Active/tap feedback for all interactive elements on mobile */
+a:active, button:active {
+  transform: scale(0.97);
+}
+
 .form-step-enter { animation: slideIn 0.3s ease-out; }
 @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
