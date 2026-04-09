@@ -130,12 +130,16 @@ export const QuoteForm: React.FC = () => {
       const res = await fetch('/api/quote', { method: 'POST', body });
 
       if (!res.ok) {
-        throw new Error('Failed to send');
+        const data = await res.json().catch(() => null);
+        const detail = data?.error || `Server responded with ${res.status}`;
+        throw new Error(detail);
       }
 
       setSubmitted(true);
-    } catch {
-      setSubmitError(`Something went wrong while sending your request. Please try again, or call us on ${businessInfo.phone} for a quick quote.`);
+    } catch (err) {
+      const detail = err instanceof Error ? err.message : '';
+      console.error('Quote form error:', detail);
+      setSubmitError(`Something went wrong while sending your request (${detail}). Please try again, or call us on ${businessInfo.phone} for a quick quote.`);
     } finally {
       setSubmitting(false);
     }
