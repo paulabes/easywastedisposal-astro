@@ -17,6 +17,44 @@ const serviceIcons: Record<string, any> = {
   'wait-and-load': Truck,
 };
 
+const compressImage = (file: File, maxWidth = 1200, quality = 0.7): Promise<File> => {
+  return new Promise((resolve) => {
+    // If already small enough, skip compression
+    if (file.size <= 500 * 1024) {
+      resolve(file);
+      return;
+    }
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      let { width, height } = img;
+      if (width > maxWidth) {
+        height = Math.round((height * maxWidth) / width);
+        width = maxWidth;
+      }
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d')!;
+      ctx.drawImage(img, 0, 0, width, height);
+      canvas.toBlob(
+        (blob) => {
+          if (blob) {
+            const compressedName = file.name.replace(/\.[^.]+$/, '.jpg');
+            resolve(new File([blob], compressedName, { type: 'image/jpeg' }));
+          } else {
+            resolve(file);
+          }
+        },
+        'image/jpeg',
+        quality,
+      );
+      URL.revokeObjectURL(img.src);
+    };
+    img.onerror = () => resolve(file);
+    img.src = URL.createObjectURL(file);
+  });
+};
+
 export const QuoteForm: React.FC = () => {
   const [formStep, setFormStep] = useState(1);
   const [formData, setFormData] = useState({
@@ -50,7 +88,7 @@ export const QuoteForm: React.FC = () => {
 
   const [imageError, setImageError] = useState('');
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       setImageError('');
       const newFiles = Array.from(e.target.files);
@@ -64,7 +102,9 @@ export const QuoteForm: React.FC = () => {
       if (newFiles.length > remaining) {
         setImageError(`You can only upload ${remaining} more photo${remaining === 1 ? '' : 's'}.`);
       }
-      setImages(prev => [...prev, ...newFiles.slice(0, remaining)]);
+      const toAdd = newFiles.slice(0, remaining);
+      const compressed = await Promise.all(toAdd.map(f => compressImage(f)));
+      setImages(prev => [...prev, ...compressed]);
     }
   };
 
@@ -95,7 +135,7 @@ export const QuoteForm: React.FC = () => {
 
       setSubmitted(true);
     } catch {
-      setSubmitError('Something went wrong. Please call us instead.');
+      setSubmitError(`Something went wrong while sending your request. Please try again, or call us on ${businessInfo.phone} for a quick quote.`);
     } finally {
       setSubmitting(false);
     }
