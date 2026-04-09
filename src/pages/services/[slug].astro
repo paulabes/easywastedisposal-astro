@@ -207,12 +207,12 @@ const schemas = [serviceSchema, faqSchema].filter(Boolean);
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           {[
-            { title: 'Request a quote', desc: 'Fill in our quick form and upload a photo to help us give you an accurate, upfront price.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zm-3 16H8v-2h6v2zm2-4H8v-2h8v2zm0-4H8V8h8v2z"/></svg>' },
-            { title: 'We collect', desc: `Our licensed team arrives at your chosen time - ${availability.toLowerCase()} and next-day available. We do all the heavy lifting.`, icon: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9 1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>' },
-            { title: 'Responsible disposal', desc: 'Your waste is responsibly recycled or disposed of. You receive a waste transfer note for your records.', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-5l-3.15 3.15-1.41-1.41L12 7.67l5.56 5.56-1.41 1.41L13 11.5v5h-2z"/></svg>' },
+            { title: 'Request a quote', desc: 'Fill in our quick form and upload a photo to help us give you an accurate, upfront price.' },
+            { title: 'We collect', desc: `Our licensed team arrives at your chosen time - ${availability.toLowerCase()} and next-day available. We do all the heavy lifting.` },
+            { title: 'Responsible disposal', desc: 'Your waste is responsibly recycled or disposed of. You receive a waste transfer note for your records.' },
           ].map((item, i) => (
             <div class="relative bg-[#f5f5f5] rounded-3xl p-8 border border-gray-300 shadow-lg text-center transition-all duration-300 hover:-translate-y-1 group">
-              <div class="flex justify-center mb-4"><div class="w-14 h-14 rounded-2xl bg-green-600 text-white flex items-center justify-center" set:html={item.icon} /></div>
+              <div class="flex justify-center mb-4"><div class="w-14 h-14 rounded-2xl bg-green-600 text-white flex items-center justify-center text-2xl font-extrabold">{i + 1}</div></div>
               <h3 class="text-lg font-bold text-dark mb-2">{item.title}</h3>
               <p class="text-sm text-gray-500 leading-relaxed mb-4">{item.desc}</p>
               {i === 0 && (
