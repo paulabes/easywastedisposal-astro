@@ -3,6 +3,59 @@ export const prerender = false;
 import type { APIRoute } from 'astro';
 import { Resend } from 'resend';
 
+async function sendWhatsAppAlert(data: {
+  service: string;
+  postcode: string;
+  timeframe: string;
+  name: string;
+  phone: string;
+  email: string;
+  details: string;
+  photoCount: number;
+}) {
+  const accountSid = import.meta.env.TWILIO_ACCOUNT_SID;
+  const authToken = import.meta.env.TWILIO_AUTH_TOKEN;
+  const from = import.meta.env.TWILIO_WHATSAPP_FROM;
+  const to = import.meta.env.TWILIO_WHATSAPP_TO;
+
+  if (!accountSid || !authToken || !from || !to) {
+    console.warn('Twilio WhatsApp env vars missing — skipping alert');
+    return;
+  }
+
+  const body =
+    `🚛 New Quote Request\n\n` +
+    `Service: ${data.service}\n` +
+    `Postcode: ${data.postcode}\n` +
+    `Timeframe: ${data.timeframe}\n` +
+    `Name: ${data.name}\n` +
+    `Phone: ${data.phone}\n` +
+    `Email: ${data.email}\n` +
+    `Details: ${data.details || 'None'}` +
+    (data.photoCount > 0 ? `\nPhotos: ${data.photoCount} attached (see email)` : '');
+
+  try {
+    const res = await fetch(`https://api.twilio.com/2010-04-01/Accounts/${accountSid}/Messages.json`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Basic ${Buffer.from(`${accountSid}:${authToken}`).toString('base64')}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({
+        From: from.startsWith('whatsapp:') ? from : `whatsapp:${from}`,
+        To: to.startsWith('whatsapp:') ? to : `whatsapp:${to}`,
+        Body: body,
+      }),
+    });
+
+    if (!res.ok) {
+      console.error('Twilio WhatsApp error:', res.status, await res.text());
+    }
+  } catch (err) {
+    console.error('Twilio WhatsApp exception:', err instanceof Error ? err.message : String(err));
+  }
+}
+
 export const POST: APIRoute = async ({ request }) => {
   const resend = new Resend(import.meta.env.RESEND_API_KEY);
 
@@ -38,6 +91,7 @@ export const POST: APIRoute = async ({ request }) => {
     const { error } = await resend.emails.send({
       from: 'Easy Waste Disposal <quotes@easywastedisposal.com>',
       to: [toEmail],
+      replyTo: [email],
       subject: `New Quote Request: ${service} - ${postcode}`,
       attachments,
       html: `
@@ -62,6 +116,8 @@ export const POST: APIRoute = async ({ request }) => {
         headers: { 'Content-Type': 'application/json' },
       });
     }
+
+    await sendWhatsAppAlert({ service, postcode, timeframe, name, phone, email, details, photoCount: attachments.length });
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
