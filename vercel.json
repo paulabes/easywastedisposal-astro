@@ -67,6 +67,16 @@
     { "source": "/clearance-services", "destination": "/services/house-clearance", "permanent": true },
     { "source": "/clearance-services/", "destination": "/services/house-clearance", "permanent": true },
     { "source": "/easywastedisposal.com/locations", "destination": "/locations", "permanent": true },
-    { "source": "/easywastedisposal.com/:path*", "destination": "/:path*", "permanent": true }
+    { "source": "/easywastedisposal.com/:path*", "destination": "/:path*", "permanent": true },
+    { "source": "/about-easy-waste-disposal-haringey", "destination": "/about", "permanent": true },
+    { "source": "/about-easy-waste-disposal-haringey/", "destination": "/about", "permanent": true },
+    { "source": "/garden-waste-collection-haringey", "destination": "/locations/haringey/garden-waste-removal", "permanent": true },
+    { "source": "/garden-waste-collection-haringey/", "destination": "/locations/haringey/garden-waste-removal", "permanent": true },
+    { "source": "/garden-waste-collection", "destination": "/services/garden-waste-removal", "permanent": true },
+    { "source": "/garden-waste-collection/", "destination": "/services/garden-waste-removal", "permanent": true },
+    { "source": "/waste-in-london-articles", "destination": "/", "permanent": true },
+    { "source": "/waste-in-london-articles/", "destination": "/", "permanent": true },
+    { "source": "/privacy-policy/feed", "destination": "/privacy", "permanent": true },
+    { "source": "/privacy-policy/feed/", "destination": "/privacy", "permanent": true }
   ]
 }
